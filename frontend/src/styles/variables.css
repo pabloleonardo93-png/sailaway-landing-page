@@ -10,7 +10,7 @@
   --color-overlay-light: rgb(3 24 39 / 8%);
   --color-overlay-top: rgb(3 24 39 / 22%);
 
-  --font-display: 'Libre Caslon Display', Georgia, 'Times New Roman', serif;
+  --font-display: 'Liria', serif;
   --font-interface: Arial, Helvetica, sans-serif;
   --page-gutter: clamp(1.5rem, 6.25vw, 8rem);
   --content-width: 90rem;
