@@ -1,0 +1,21 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.75rem;
+  min-height: 3.5rem;
+  padding: 1rem 1.5rem;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-decoration: none;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.button--solid { color: var(--color-navy); background: var(--color-sun); }
+.button--solid:not(:disabled):hover { background: var(--color-sun-hover); }
+
+.button:disabled { cursor: not-allowed; }
+.button:disabled svg { opacity: 0.45; }

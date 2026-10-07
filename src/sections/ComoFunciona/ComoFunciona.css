@@ -1,0 +1,88 @@
+.como-funciona {
+  --step-line: color-mix(in srgb, var(--color-off-white) 18%, var(--color-navy));
+  --step-muted: color-mix(in srgb, var(--color-off-white) 78%, var(--color-navy));
+  --step-number: color-mix(in srgb, var(--color-sun) 75%, var(--color-navy));
+  padding-block: clamp(5rem, 7vw, 6.5rem);
+  color: var(--color-off-white);
+  background: var(--color-navy);
+}
+
+.como-funciona__inner {
+  width: calc(100% - var(--page-gutter) * 2);
+  max-width: 1280px;
+  margin-inline: auto;
+}
+
+.como-funciona__heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.22fr) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  margin-bottom: clamp(3rem, 5vw, 4.5rem);
+}
+
+.como-funciona__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 5vw, 4.25rem);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+.como-funciona__intro {
+  max-width: 31.25rem;
+  margin: 0;
+  color: var(--step-muted);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+
+.como-funciona__steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.como-funciona__step {
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--step-line);
+}
+
+.como-funciona__number {
+  display: block;
+  margin-bottom: 1.75rem;
+  color: var(--step-number);
+  font-family: var(--font-display);
+  font-size: 4rem;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1;
+}
+
+.como-funciona__step-title {
+  margin: 0 0 1rem;
+  font-size: clamp(1.25rem, 1.7vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.como-funciona__description {
+  max-width: 23rem;
+  margin: 0;
+  color: var(--step-muted);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+@media (max-width: 47.999rem) {
+  .como-funciona { padding-block: 3.5rem 4rem; }
+  .como-funciona__heading { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
+  .como-funciona__intro { font-size: 1rem; }
+  .como-funciona__steps { grid-template-columns: 1fr; gap: 2rem; }
+  .como-funciona__number { font-size: 3.5rem; margin-bottom: 1.25rem; }
+  .como-funciona__step-title { font-size: 1.375rem; margin-bottom: 0.75rem; }
+}

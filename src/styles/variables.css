@@ -1,0 +1,24 @@
+:root {
+  --color-navy: #062f4b;
+  --color-ocean: #007fa8;
+  --color-white: #ffffff;
+  --color-off-white: #f7f4ee;
+  --color-sun: #ffbd4a;
+  --color-sun-hover: #ffd17d;
+  --color-overlay-strong: rgb(3 24 39 / 67%);
+  --color-overlay-medium: rgb(3 24 39 / 45%);
+  --color-overlay-light: rgb(3 24 39 / 8%);
+  --color-overlay-top: rgb(3 24 39 / 22%);
+
+  --font-display: 'Libre Caslon Display', Georgia, 'Times New Roman', serif;
+  --font-interface: Arial, Helvetica, sans-serif;
+  --page-gutter: clamp(1.5rem, 6.25vw, 8rem);
+  --content-width: 90rem;
+  --header-height: 7rem;
+  --transition-fast: 180ms ease;
+  --transition-slow: 400ms ease;
+}
+
+@media (max-width: 59.999rem) {
+  :root { --header-height: 5.5rem; }
+}

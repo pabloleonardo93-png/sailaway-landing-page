@@ -1,0 +1,38 @@
+# Dependências e arquivos gerados
+node_modules/
+dist/
+dist-ssr/
+coverage/
+.cache/
+*.tsbuildinfo
+
+# Configurações locais e variáveis de ambiente
+.env
+.env.*
+!.env.example
+*.local
+
+# Logs e arquivos temporários
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.tmp
+*.temp
+*.sw?
+
+# Sistema operacional e editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Instruções locais do Codex
+AGENTS.md

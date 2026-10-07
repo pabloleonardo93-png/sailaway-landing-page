@@ -1,0 +1,36 @@
+.viagens-passagens {
+  padding-top: clamp(3.5rem, 6vw, 5.5rem);
+  color: var(--color-navy);
+  background: var(--color-off-white);
+}
+
+.viagens-passagens__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.22fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  width: calc(100% - var(--page-gutter) * 2);
+  max-width: 1280px;
+  margin-inline: auto;
+}
+
+.viagens-passagens__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 4.5vw, 4rem);
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.viagens-passagens__intro {
+  max-width: 27.5rem;
+  margin: 0;
+  color: color-mix(in srgb, var(--color-navy) 78%, var(--color-off-white));
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+
+@media (max-width: 47.999rem) {
+  .viagens-passagens__inner { grid-template-columns: 1fr; gap: 1.5rem; }
+  .viagens-passagens__intro { font-size: 1rem; }
+}
