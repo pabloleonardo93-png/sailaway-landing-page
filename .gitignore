@@ -1,6 +1,6 @@
 # Dependências e arquivos gerados
-node_modules/
-dist/
+frontend/node_modules/
+frontend/dist/
 dist-ssr/
 coverage/
 .cache/
@@ -9,7 +9,10 @@ coverage/
 # Configurações locais e variáveis de ambiente
 .env
 .env.*
+**/.env
+**/.env.*
 !.env.example
+!**/.env.example
 *.local
 
 # Logs e arquivos temporários
@@ -34,5 +37,7 @@ Thumbs.db
 *.njsproj
 *.sln
 
-# Instruções locais do Codex
+# Instruções e capturas locais
 AGENTS.md
+**/AGENTS.md
+/preview/
