@@ -1,0 +1,46 @@
+name: SAILAWAY CI
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: ./frontend
+
+jobs:
+  frontend:
+    name: Validar frontend
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Obter o repositório
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Executar lint
+        run: npm run lint
+
+      - name: Verificar TypeScript e gerar build
+        run: npm run build
