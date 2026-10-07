@@ -72,7 +72,6 @@ export function Hero() {
 
       <div className="hero__inner container">
         <div className="hero__content">
-          <p className="hero__eyebrow">EXPLORE NOVOS HORIZONTES</p>
           <h1 className="hero__title" id="hero-title">
             Sua próxima<br />viagem começa aqui.
           </h1>

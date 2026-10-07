@@ -44,7 +44,7 @@
 
 .faq__list { border-top: 1px solid var(--faq-line); }
 .faq__item { border-bottom: 1px solid var(--faq-line); }
-.faq__question { margin: 0; }
+.faq__question { margin: 0; font-family: var(--font-interface); }
 
 .faq__question button {
   display: grid;
