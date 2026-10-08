@@ -1,5 +1,4 @@
-import { useState, type CSSProperties } from 'react'
-import { useScrollExperiencias } from './useScrollExperiencias'
+import { useState } from 'react'
 import './Experiencias.css'
 
 type Experiencia = {
@@ -41,7 +40,7 @@ const experiencias: Experiencia[] = [
   },
 ]
 
-function BlocoExperiencia({ experiencia, indice }: { experiencia: Experiencia; indice: number }) {
+function BlocoExperiencia({ experiencia }: { experiencia: Experiencia }) {
   const [imagemIndisponivel, setImagemIndisponivel] = useState(false)
   const { id, categoria, frase, imagem, descricaoImagem } = experiencia
 
@@ -49,7 +48,6 @@ function BlocoExperiencia({ experiencia, indice }: { experiencia: Experiencia; i
     <article
       className={'experiencia experiencia--' + id}
       aria-labelledby={'experiencia-' + id}
-      style={{ '--experience-index': indice } as CSSProperties}
     >
       <div className="experiencia__media">
         {!imagemIndisponivel && (
@@ -62,7 +60,6 @@ function BlocoExperiencia({ experiencia, indice }: { experiencia: Experiencia; i
             onError={() => setImagemIndisponivel(true)}
           />
         )}
-        <div className="experiencia__overlay" aria-hidden="true" />
       </div>
       <div className="experiencia__content">
         <h3 className="experiencia__category" id={'experiencia-' + id}>{categoria}</h3>
@@ -73,8 +70,6 @@ function BlocoExperiencia({ experiencia, indice }: { experiencia: Experiencia; i
 }
 
 export function Experiencias() {
-  const { percursoRef, palcoRef } = useScrollExperiencias(experiencias.length)
-
   return (
     <section className="experiencias" id="experiencias" aria-labelledby="experiencias-titulo">
       <div className="experiencias__inner">
@@ -88,16 +83,10 @@ export function Experiencias() {
           </p>
         </div>
       </div>
-      <div
-        className="experiencias__scroll"
-        ref={percursoRef}
-        style={{ '--experience-count': experiencias.length } as CSSProperties}
-      >
-        <div className="experiencias__inner experiencias__grid" ref={palcoRef}>
-          {experiencias.map((experiencia, indice) => (
-            <BlocoExperiencia key={experiencia.id} experiencia={experiencia} indice={indice} />
-          ))}
-        </div>
+      <div className="experiencias__inner experiencias__grid">
+        {experiencias.map((experiencia) => (
+          <BlocoExperiencia key={experiencia.id} experiencia={experiencia} />
+        ))}
       </div>
     </section>
   )

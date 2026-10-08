@@ -1,10 +1,8 @@
-/** Preencha com o link oficial do WhatsApp quando o contato for definido. */
-export const planningUrl: string | undefined = undefined
-export const sobreUrl: string | undefined = undefined
+export const planningUrl = '#captacao'
 
 export const navigation = [
-  { label: 'inCruises', href: '#incruises' },
-  { label: 'Viagens', href: '#viagens-passagens' },
+  { label: 'Serviços', href: '#servicos' },
+  { label: 'Experiências', href: '#experiencias' },
   { label: 'Como funciona', href: '#como-funciona' },
   { label: 'Sobre', href: '#sobre' },
 ] as const
@@ -14,7 +12,7 @@ export const heroVideo: { default: string; desktop?: string; mobile?: string } =
   default: `${import.meta.env.BASE_URL}videos/hero-sailaway-ultra.mp4`,
 }
 
-export type InteresseCaptacao = 'incruises' | 'viagens-passagens' | 'ambos'
+export type InteresseCaptacao = 'cruzeiro' | 'viagem-hospedagem' | 'passagens' | 'viagem-personalizada' | 'ainda-nao-sei'
 
 export type DadosCaptacao = {
   nome: string
@@ -34,7 +32,7 @@ export const contato: {
   instagram: string | undefined
   email: string | undefined
 } = {
-  whatsapp: planningUrl,
+  whatsapp: undefined,
   instagram: undefined,
   email: undefined,
 }

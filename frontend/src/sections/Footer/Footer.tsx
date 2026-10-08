@@ -5,8 +5,7 @@ import './Footer.css'
 const anoAtual = new Date().getFullYear()
 
 const explore = [
-  { label: 'inCruises', href: '#incruises' },
-  { label: 'Viagens e Passagens', href: '#viagens-passagens' },
+  { label: 'Serviços', href: '#servicos' },
   { label: 'Experiências', href: '#experiencias' },
 ] as const
 
