@@ -9,9 +9,11 @@ const campos = [
 ] as const
 
 const interesses: { valor: InteresseCaptacao; label: string }[] = [
-  { valor: 'incruises', label: 'inCruises' },
-  { valor: 'viagens-passagens', label: 'Viagens e Passagens' },
-  { valor: 'ambos', label: 'Ambos' },
+  { valor: 'cruzeiro', label: 'Cruzeiro' },
+  { valor: 'viagem-hospedagem', label: 'Viagem e hospedagem' },
+  { valor: 'passagens', label: 'Passagens' },
+  { valor: 'viagem-personalizada', label: 'Viagem personalizada' },
+  { valor: 'ainda-nao-sei', label: 'Ainda não sei' },
 ]
 
 type ErrosCaptacao = Partial<Record<keyof DadosCaptacao, string>>
@@ -135,7 +137,7 @@ export function Captacao() {
             className="captacao__interests"
             aria-describedby={erros.interesse ? 'captacao-interesse-erro' : undefined}
           >
-            <legend>Tenho interesse em</legend>
+            <legend>O que você procura?</legend>
             <div className="captacao__options">
               {interesses.map(({ valor, label }) => (
                 <label className="captacao__option" key={valor}>

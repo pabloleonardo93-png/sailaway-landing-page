@@ -1,6 +1,6 @@
 # SAILAWAY Landing Page
 
-Landing page responsiva da SAILAWAY, desenvolvida para apresentar a marca, experiências de viagem e duas frentes de interesse: inCruises e Viagens e Passagens.
+Landing page responsiva da SAILAWAY, desenvolvida para apresentar a marca, o planejamento de viagens, passagens e experiências.
 
 ## Sobre o projeto
 
@@ -17,14 +17,13 @@ O site apresenta serviços relacionados a viagens e reúne um formulário para i
 ## Principais áreas
 
 - Header e Hero com vídeo de fundo.
-- Escolha de interesse entre inCruises e Viagens e Passagens.
-- Apresentação da inCruises.
-- Viagens e Passagens, incluindo a seção Experiências.
-- Captação de interesse com Nome, WhatsApp, E-mail e Interesse.
-- Sobre a SAILAWAY, no componente Institucional.
-- Como funciona.
+- Apresentação da SAILAWAY, no componente Institucional.
+- Serviços de cruzeiros, hotéis e resorts, passagens e viagens personalizadas, no componente EscolhaInteresse.
+- Galeria editorial de Experiências, no componente ViagensPassagens.
+- Como funciona, com timeline horizontal no desktop e apresentação vertical no mobile.
+- Captação de interesse com Nome, WhatsApp, E-mail e opções relacionadas à necessidade de viagem.
 - FAQ / Dúvidas frequentes.
-- Contato final e Footer.
+- Footer com vídeo de fundo e navegação interna.
 
 ## Executando localmente
 

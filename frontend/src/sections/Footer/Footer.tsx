@@ -5,8 +5,7 @@ import './Footer.css'
 const anoAtual = new Date().getFullYear()
 
 const explore = [
-  { label: 'inCruises', href: '#incruises' },
-  { label: 'Viagens e Passagens', href: '#viagens-passagens' },
+  { label: 'Serviços', href: '#servicos' },
   { label: 'Experiências', href: '#experiencias' },
 ] as const
 
@@ -51,23 +50,6 @@ export function Footer() {
 
   return (
     <footer className="site-footer">
-      <section className="contato-final" aria-labelledby="contato-final-titulo">
-        <div className="contato-final__inner">
-          <div>
-            <p className="contato-final__eyebrow">PRONTO PARA COMEÇAR?</p>
-            <h2 className="contato-final__title" id="contato-final-titulo">
-              Sua próxima viagem<br />pode começar por aqui.
-            </h2>
-          </div>
-          <div className="contato-final__action">
-            <p className="contato-final__intro">
-              Conte o que você procura e deixe a SAILAWAY ajudar a direcionar o próximo passo.
-            </p>
-            <a className="contato-final__cta" href="#captacao">Planeje sua viagem</a>
-          </div>
-        </div>
-      </section>
-
       <div className="site-footer__body">
         <video
           className="site-footer__video"

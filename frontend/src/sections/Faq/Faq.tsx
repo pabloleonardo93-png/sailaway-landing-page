@@ -4,11 +4,11 @@ import './Faq.css'
 const perguntas = [
   {
     pergunta: 'Posso comprar minha viagem diretamente pelo site?',
-    resposta: 'Não. A landing da SAILAWAY foi criada para apresentar as opções e identificar o seu interesse. Depois disso, o atendimento segue pelo canal de contato da SAILAWAY.',
+    resposta: 'Não. O site da SAILAWAY foi criado para apresentar as opções e identificar o seu interesse. Depois disso, o atendimento segue pelo canal de contato da SAILAWAY.',
   },
   {
-    pergunta: 'Posso pedir informações sobre inCruises e Viagens e Passagens ao mesmo tempo?',
-    resposta: 'Sim. No formulário, você pode escolher inCruises, Viagens e Passagens ou indicar interesse em ambos.',
+    pergunta: 'Que tipo de viagem posso planejar com a SAILAWAY?',
+    resposta: 'Você pode indicar interesse em cruzeiro, viagem e hospedagem, passagens ou viagem personalizada. Se ainda não souber, pode escolher a opção "Ainda não sei".',
   },
   {
     pergunta: 'Como funciona o atendimento?',

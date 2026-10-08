@@ -1,7 +1,6 @@
 import { Header } from './components/Header/Header'
 import { Hero } from './sections/Hero/Hero'
 import { EscolhaInteresse } from './sections/EscolhaInteresse/EscolhaInteresse'
-import { InCruises } from './sections/InCruises/InCruises'
 import { ViagensPassagens } from './sections/ViagensPassagens/ViagensPassagens'
 import { Captacao } from './sections/Captacao/Captacao'
 import { Institucional } from './sections/Institucional/Institucional'
@@ -16,12 +15,11 @@ export default function App() {
       <Header />
       <main id="conteudo" tabIndex={-1}>
         <Hero />
-        <EscolhaInteresse />
-        <InCruises />
-        <ViagensPassagens />
-        <Captacao />
         <Institucional />
+        <EscolhaInteresse />
+        <ViagensPassagens />
         <ComoFunciona />
+        <Captacao />
         <Faq />
       </main>
       <Footer />
