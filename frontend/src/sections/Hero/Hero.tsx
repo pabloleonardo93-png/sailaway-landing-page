@@ -57,6 +57,7 @@ export function Hero() {
       <video
         className={`hero__video${hasFrame ? ' is-ready' : ''}`}
         ref={videoRef}
+        src={heroVideo.default}
         autoPlay
         muted
         loop
@@ -73,12 +74,12 @@ export function Hero() {
       <div className="hero__inner container">
         <div className="hero__content">
           <h1 className="hero__title" id="hero-title">
-            Sua próxima<br />viagem começa aqui.
+            Sua próxima viagem pode ser só o começo.
           </h1>
           <p className="hero__description">
-            Conte pra gente como você quer viajar. A SAILAWAY cuida dos detalhes para deixar o caminho até o embarque mais simples, seguro e do seu jeito.
+            Pensando em viajar? A SAILAWAY ajuda você a planejar seu roteiro e também apresenta uma proposta para quem deseja fazer parte da nossa rede de membros.
           </p>
-          <Button href={planningUrl}>Planeje sua viagem</Button>
+          <Button href={planningUrl} showArrow={false}>Quero saber mais</Button>
         </div>
       </div>
     </section>

@@ -9,11 +9,9 @@ const campos = [
 ] as const
 
 const interesses: { valor: InteresseCaptacao; label: string }[] = [
-  { valor: 'cruzeiro', label: 'Cruzeiro' },
-  { valor: 'viagem-hospedagem', label: 'Viagem e hospedagem' },
-  { valor: 'passagens', label: 'Passagens' },
-  { valor: 'viagem-personalizada', label: 'Viagem personalizada' },
-  { valor: 'ainda-nao-sei', label: 'Ainda não sei' },
+  { valor: 'planejamento-viagem', label: 'Quero planejar uma viagem' },
+  { valor: 'socio-membro', label: 'Quero saber como me tornar membro' },
+  { valor: 'outras-duvidas', label: 'Tenho outras dúvidas' },
 ]
 
 type ErrosCaptacao = Partial<Record<keyof DadosCaptacao, string>>
@@ -97,10 +95,10 @@ export function Captacao() {
         <div className="captacao__heading">
           <p className="captacao__eyebrow">VAMOS PLANEJAR?</p>
           <h2 className="captacao__title" id="captacao-titulo">
-            Por onde você<br />quer <span className="captacao__title-accent">começar?</span>
+            Vamos <span className="captacao__title-accent">conversar?</span>
           </h2>
           <p className="captacao__intro">
-            Conte um pouco do que você procura. Assim, a SAILAWAY consegue direcionar seu atendimento para o caminho certo.
+            Quer planejar uma viagem ou saber como funciona a participação na SAILAWAY? Escolha o assunto que mais interessa a você e conte pra gente o que está procurando.
           </p>
         </div>
 
@@ -159,7 +157,7 @@ export function Captacao() {
           </fieldset>
 
           <button className="captacao__submit" type="submit" disabled={enviando}>
-            {enviando ? 'Enviando…' : 'Enviar interesse'}
+            {enviando ? 'Enviando…' : 'Fale conosco'}
           </button>
           <p className="captacao__status" role="status" aria-live="polite">{mensagem}</p>
         </form>

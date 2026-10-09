@@ -29,7 +29,7 @@ export function Header() {
 
   const planningButton = (
     <Button href={planningUrl} showArrow={false} onClick={() => setIsOpen(false)}>
-      Planeje sua viagem
+      Fale conosco
     </Button>
   )
 

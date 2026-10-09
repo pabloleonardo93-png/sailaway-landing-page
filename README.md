@@ -18,7 +18,6 @@ O site apresenta serviços relacionados a viagens e reúne um formulário para i
 
 - Header e Hero com vídeo de fundo.
 - Apresentação da SAILAWAY, no componente Institucional.
-- Serviços de cruzeiros, hotéis e resorts, passagens e viagens personalizadas, no componente EscolhaInteresse.
 - Galeria editorial de Experiências, no componente ViagensPassagens.
 - Como funciona, com timeline horizontal no desktop e apresentação vertical no mobile.
 - Captação de interesse com Nome, WhatsApp, E-mail e opções relacionadas à necessidade de viagem.
