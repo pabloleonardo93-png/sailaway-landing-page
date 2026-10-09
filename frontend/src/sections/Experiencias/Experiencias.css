@@ -41,45 +41,30 @@
   line-height: 1.75;
 }
 
-.experiencias__grid {
+.experiencias__stage {
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  align-items: end;
-  column-gap: clamp(1.5rem, 3vw, 2.5rem);
-  row-gap: 3rem;
+  gap: clamp(3rem, 5vw, 5rem);
 }
 
-.experiencia { min-width: 0; }
-
-.experiencia--cruzeiros {
-  --image-position: 50% 65%;
-  grid-column: span 7;
+.experiencia {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
+  min-width: 0;
 }
 
-.experiencia--praias-resorts {
-  --image-position: 50% 70%;
-  grid-column: span 5;
-}
-
-.experiencia--romance {
-  --image-position: 62% 55%;
-  grid-column: span 5;
-}
-
-.experiencia--familia {
-  --image-position: 50% 55%;
-  grid-column: span 7;
-}
+.experiencia--cruzeiros { --image-position: 50% 65%; }
+.experiencia--praias-resorts { --image-position: 50% 70%; }
+.experiencia--romance { --image-position: 62% 55%; }
 
 .experiencia__media {
-  height: clamp(18rem, 27vw, 24rem);
+  position: relative;
+  grid-column: 2;
+  grid-row: 1;
+  height: clamp(23rem, 45vw, 38rem);
   overflow: hidden;
   background: var(--color-navy);
-}
-
-.experiencia--praias-resorts .experiencia__media,
-.experiencia--romance .experiencia__media {
-  height: clamp(20rem, 32vw, 28rem);
 }
 
 .experiencia__image {
@@ -88,13 +73,17 @@
   height: 100%;
   object-fit: cover;
   object-position: var(--image-position);
-  transition: transform var(--transition-slow);
 }
 
-.experiencia__content { padding-top: 1.25rem; }
+.experiencia__content {
+  position: relative;
+  grid-column: 1;
+  grid-row: 1;
+  min-width: 0;
+}
 
 .experiencia__category {
-  margin: 0 0 0.625rem;
+  margin: 0 0 1.25rem;
   font-family: var(--font-interface);
   font-size: 0.6875rem;
   font-weight: 500;
@@ -103,41 +92,84 @@
 }
 
 .experiencia__phrase {
-  max-width: 31rem;
+  max-width: 25rem;
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(1.75rem, 2.3vw, 2.125rem);
+  font-size: clamp(2.5rem, 3.6vw, 3.5rem);
   font-weight: 400;
-  line-height: 1.15;
+  letter-spacing: -0.025em;
+  line-height: 1.12;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .experiencia:hover .experiencia__image { transform: scale(1.015); }
+.experiencia__description {
+  max-width: 28rem;
+  margin: 1.5rem 0 0;
+  font-family: var(--font-interface);
+  font-size: 1rem;
+  line-height: 1.65;
 }
 
-@media (max-width: 64rem) {
-  .experiencias__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
-  .experiencia { grid-column: auto; }
-  .experiencia__media { height: 20rem; }
-  .experiencia--praias-resorts .experiencia__media,
-  .experiencia--romance .experiencia__media { height: 24rem; }
-  .experiencia--familia { --image-position: 88% 55%; }
+.experiencias[data-experiencias='sticky'] .experiencias__percurso {
+  height: calc(100svh + clamp(66rem, 170svh, 103rem));
+}
+
+.experiencias[data-experiencias='sticky'] .experiencias__stage {
+  position: sticky;
+  top: 0;
+  display: block;
+  height: 100svh;
+}
+
+.experiencias[data-experiencias='sticky'] .experiencia {
+  position: absolute;
+  inset: 2rem 0;
+}
+
+.experiencias[data-experiencias='sticky'] .experiencia__media {
+  height: 100%;
+  will-change: clip-path;
+}
+
+.experiencias[data-experiencias='sticky'] .experiencia__image {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+.experiencias[data-experiencias='sticky'] .experiencia__content {
+  will-change: transform, opacity;
 }
 
 @media (max-width: 47.999rem) {
+  .experiencia {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .experiencia__media {
+    grid-column: 1;
+    grid-row: 1;
+    height: clamp(18rem, 65vw, 30rem);
+  }
+  .experiencia__content {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .experiencia__phrase {
+    max-width: 31rem;
+    font-size: clamp(1.75rem, 4.5vw, 2.5rem);
+  }
   .experiencias { padding-block: 3.5rem 4rem; }
   .experiencias__eyebrow { margin-bottom: 1.5rem; font-size: 0.625rem; }
   .experiencias__heading { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
   .experiencias__title { font-size: clamp(2.75rem, 8vw, 3.5rem); }
   .experiencias__intro { font-size: 1rem; }
-  .experiencias__grid { grid-template-columns: 1fr; gap: 2.5rem; }
-  .experiencia__media { height: 18rem; }
-  .experiencia--praias-resorts .experiencia__media,
-  .experiencia--romance .experiencia__media { height: 23rem; }
+  .experiencias__stage { gap: 2.5rem; }
+  .experiencia__category { margin-bottom: 0.625rem; }
   .experiencia--cruzeiros { --image-position: 68% 60%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .experiencia__image { transition: none; }
-  .experiencia:hover .experiencia__image { transform: none; }
+  .experiencia__media,
+  .experiencia__content,
+  .experiencia__image { will-change: auto; }
 }

@@ -3,20 +3,28 @@ import './Faq.css'
 
 const perguntas = [
   {
+    pergunta: 'Como a SAILAWAY pode me ajudar a planejar uma viagem?',
+    resposta: 'Você conta pra gente para onde quer ir, quando pretende viajar e o que tem em mente. A partir disso, podemos conversar sobre as opções e ajudar a organizar seu roteiro.',
+  },
+  {
+    pergunta: 'Posso pedir ajuda mesmo sem ter um destino definido?',
+    resposta: 'Claro. Se você ainda está escolhendo, pode contar o tipo de viagem que gostaria de fazer e quanto pretende gastar. Isso já ajuda a começar o planejamento.',
+  },
+  {
+    pergunta: 'Como faço para me tornar sócio-membro?',
+    resposta: 'É só entrar em contato e dizer que quer conhecer a proposta de associação. A equipe explica como funciona a participação e quais são as condições, para você avaliar com calma.',
+  },
+  {
+    pergunta: 'Como funciona a rede de membros?',
+    resposta: 'A SAILAWAY também apresenta uma proposta de participação em rede. Antes de aderir, você pode solicitar informações sobre as regras de indicação, as responsabilidades dos membros e as condições de participação.',
+  },
+  {
     pergunta: 'Posso comprar minha viagem diretamente pelo site?',
-    resposta: 'Não. O site da SAILAWAY foi criado para apresentar as opções e identificar o seu interesse. Depois disso, o atendimento segue pelo canal de contato da SAILAWAY.',
-  },
-  {
-    pergunta: 'Que tipo de viagem posso planejar com a SAILAWAY?',
-    resposta: 'Você pode indicar interesse em cruzeiro, viagem e hospedagem, passagens ou viagem personalizada. Se ainda não souber, pode escolher a opção "Ainda não sei".',
-  },
-  {
-    pergunta: 'Como funciona o atendimento?',
-    resposta: 'Você conhece as opções, informa o que procura e deixa seus dados de contato. A partir daí, a SAILAWAY pode dar continuidade ao atendimento de acordo com o seu interesse.',
+    resposta: 'Não. As viagens não são compradas pelo site. Aqui você pode conhecer as possibilidades de planejamento e a proposta de participação como membro.',
   },
   {
     pergunta: 'Quais informações preciso enviar?',
-    resposta: 'O formulário solicita nome, WhatsApp, e-mail e a opção de interesse para ajudar a direcionar o atendimento.',
+    resposta: 'O formulário solicita nome, WhatsApp, e-mail e a opção de interesse para ajudar a direcionar o atendimento. O canal de envio ainda está sendo configurado. Enquanto isso, seus dados não são enviados.',
   },
 ] as const
 

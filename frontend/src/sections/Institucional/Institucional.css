@@ -1,7 +1,16 @@
 .institucional {
+  --sobre-fundo-texto: color-mix(in srgb, var(--color-navy) 70%, #02070d);
+  --sobre-fundo-video: #070d16;
   padding-block: clamp(4rem, 7vw, 6.5rem);
-  color: var(--color-navy);
-  background: var(--color-off-white);
+  overflow: clip;
+  color: var(--color-off-white);
+  background: linear-gradient(
+    90deg,
+    var(--sobre-fundo-texto) 0%,
+    var(--sobre-fundo-texto) 30%,
+    var(--sobre-fundo-video) 68%,
+    var(--sobre-fundo-video) 100%
+  );
 }
 
 .institucional__inner {
@@ -15,21 +24,12 @@
 }
 
 .institucional__eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 0.875rem;
   margin: 0 0 1.75rem;
+  color: var(--color-sun-hover);
   font-size: 0.6875rem;
   font-weight: 500;
   letter-spacing: 0.18em;
   line-height: 1.6;
-}
-
-.institucional__eyebrow::before {
-  content: '';
-  width: 2rem;
-  height: 1px;
-  background: var(--color-sun);
 }
 
 .institucional__title {
@@ -42,7 +42,7 @@
 .institucional__description {
   max-width: 29rem;
   margin: 0 0 1.125rem;
-  color: color-mix(in srgb, var(--color-navy) 82%, var(--color-off-white));
+  color: color-mix(in srgb, var(--color-off-white) 85%, var(--sobre-fundo-texto));
   font-size: 1rem;
   line-height: 1.8;
 }
@@ -52,34 +52,29 @@
   align-items: center;
   min-height: 2.75rem;
   margin-top: 0.5rem;
-  color: var(--color-navy);
+  color: var(--color-sun-hover);
   font-size: 0.875rem;
   font-weight: 600;
   text-underline-offset: 0.45em;
   text-decoration-thickness: 1px;
 }
 
-.institucional__link:hover { text-decoration-color: var(--color-ocean); }
+.institucional__link:hover { text-decoration-color: var(--color-off-white); }
+
+.institucional :focus-visible { outline-color: var(--color-sun); }
 
 .institucional__figure { min-width: 0; margin: 0; }
 
-.institucional__image {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  object-position: 100% 50%;
-}
-
-.institucional__caption {
-  margin-top: 1rem;
-  font-size: 0.75rem;
-  line-height: 1.6;
-  color: color-mix(in srgb, var(--color-navy) 75%, var(--color-off-white));
-}
-
 @media (max-width: 47.999rem) {
+  .institucional {
+    background: linear-gradient(
+      180deg,
+      var(--sobre-fundo-texto) 0%,
+      var(--sobre-fundo-texto) 45%,
+      var(--sobre-fundo-video) 85%,
+      var(--sobre-fundo-video) 100%
+    );
+  }
   .institucional__inner { grid-template-columns: 1fr; gap: 2.5rem; }
   .institucional__title { font-size: clamp(2.75rem, 8vw, 3.5rem); }
   .institucional__eyebrow { margin-bottom: 1.5rem; }

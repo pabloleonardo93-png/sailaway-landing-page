@@ -1,7 +1,6 @@
 export const planningUrl = '#captacao'
 
 export const navigation = [
-  { label: 'Serviços', href: '#servicos' },
   { label: 'Experiências', href: '#experiencias' },
   { label: 'Como funciona', href: '#como-funciona' },
   { label: 'Sobre', href: '#sobre' },
@@ -9,10 +8,10 @@ export const navigation = [
 
 /** Sem variantes, os dois breakpoints usam o mesmo MP4 oficial. */
 export const heroVideo: { default: string; desktop?: string; mobile?: string } = {
-  default: `${import.meta.env.BASE_URL}videos/hero-sailaway-ultra.mp4`,
+  default: `${import.meta.env.BASE_URL}videos/hero-sailaway-10s-1080p-web.mp4`,
 }
 
-export type InteresseCaptacao = 'cruzeiro' | 'viagem-hospedagem' | 'passagens' | 'viagem-personalizada' | 'ainda-nao-sei'
+export type InteresseCaptacao = 'planejamento-viagem' | 'socio-membro' | 'outras-duvidas'
 
 export type DadosCaptacao = {
   nome: string

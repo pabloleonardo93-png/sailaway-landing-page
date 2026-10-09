@@ -73,14 +73,8 @@
   height: 46px;
   min-height: 46px;
   padding: 0 22px;
-  border-radius: 999px;
-  color: var(--color-sun);
-  background: var(--color-navy);
   white-space: nowrap;
-  font-size: 14px;
-  font-weight: 600;
 }
-.site-header .button:not(:disabled):hover { background: var(--color-ocean); }
 .header-planning--mobile { display: none; }
 
 .menu-toggle {

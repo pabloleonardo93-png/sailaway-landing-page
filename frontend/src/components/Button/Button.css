@@ -6,7 +6,7 @@
   min-height: 3.5rem;
   padding: 1rem 1.5rem;
   border: 1px solid transparent;
-  border-radius: 2px;
+  border-radius: 999px;
   font-size: 0.875rem;
   font-weight: 600;
   line-height: 1.25;
@@ -14,8 +14,8 @@
   transition: background-color var(--transition-fast), border-color var(--transition-fast);
 }
 
-.button--solid { color: var(--color-navy); background: var(--color-sun); }
-.button--solid:not(:disabled):hover { background: var(--color-sun-hover); }
+.button--solid { color: var(--color-sun); background: var(--color-navy); }
+.button--solid:not(:disabled):hover { background: var(--color-ocean); }
 
 .button:disabled { cursor: not-allowed; }
 .button:disabled svg { opacity: 0.45; }
