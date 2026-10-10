@@ -7,7 +7,6 @@ const posterGlobo = '/images/sailaway-globo-poster.webp'
 export function WorldConnections() {
   const cenaRef = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
-  const [pausado, setPausado] = useState(false)
   const [reproduzindo, setReproduzindo] = useState(false)
 
   useEffect(() => {
@@ -20,7 +19,7 @@ export function WorldConnections() {
     let visivel = false
 
     function sincronizar() {
-      const executar = visivel && !movimentoReduzido.matches && !document.hidden && !pausado
+      const executar = visivel && !movimentoReduzido.matches && !document.hidden
       video!.autoplay = executar
 
       if (movimentoReduzido.matches) {
@@ -69,7 +68,7 @@ export function WorldConnections() {
       video.removeEventListener('loadeddata', sincronizar)
       video.pause()
     }
-  }, [pausado])
+  }, [])
 
   return (
     <div className="world-connections">
@@ -96,20 +95,6 @@ export function WorldConnections() {
           onError={() => setReproduzindo(false)}
         />
       </div>
-      <button
-        className={`world-connections__pause${reproduzindo ? ' is-ready' : ''}`}
-        type="button"
-        aria-label={pausado ? 'Retomar animação do globo' : 'Pausar animação do globo'}
-        onClick={() => setPausado((atual) => !atual)}
-      >
-        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-          {pausado ? (
-            <path d="M8 5l11 7-11 7z" fill="currentColor" />
-          ) : (
-            <path d="M8 5v14M16 5v14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-          )}
-        </svg>
-      </button>
     </div>
   )
 }
