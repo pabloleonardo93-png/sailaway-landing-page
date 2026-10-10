@@ -13,7 +13,7 @@
 .experiencias__eyebrow {
   margin: 0 0 1.75rem;
   font-size: 0.6875rem;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0.18em;
   line-height: 1.6;
 }
@@ -28,9 +28,9 @@
 
 .experiencias__title {
   margin: 0;
-  font-size: clamp(3rem, 5vw, 4.25rem);
-  letter-spacing: -0.035em;
-  line-height: 1.04;
+  font-size: var(--font-heading-size);
+  letter-spacing: var(--font-heading-tracking);
+  line-height: var(--font-heading-leading);
 }
 
 .experiencias__intro {
@@ -39,6 +39,11 @@
   color: color-mix(in srgb, var(--color-navy) 78%, var(--color-off-white));
   font-size: 1.0625rem;
   line-height: 1.75;
+}
+
+.experiencias__fixacao,
+.experiencias__painel {
+  display: contents;
 }
 
 .experiencias__stage {
@@ -84,9 +89,8 @@
 
 .experiencia__category {
   margin: 0 0 1.25rem;
-  font-family: var(--font-interface);
-  font-size: 0.6875rem;
-  font-weight: 500;
+  font-size: 0.9375rem;
+  font-weight: 400;
   letter-spacing: 0.14em;
   line-height: 1.6;
 }
@@ -161,11 +165,52 @@
   .experiencias { padding-block: 3.5rem 4rem; }
   .experiencias__eyebrow { margin-bottom: 1.5rem; font-size: 0.625rem; }
   .experiencias__heading { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
-  .experiencias__title { font-size: clamp(2.75rem, 8vw, 3.5rem); }
   .experiencias__intro { font-size: 1rem; }
   .experiencias__stage { gap: 2.5rem; }
   .experiencia__category { margin-bottom: 0.625rem; }
-  .experiencia--cruzeiros { --image-position: 68% 60%; }
+  .experiencia--cruzeiros { --image-position: 72% 50%; }
+  .experiencia--praias-resorts { --image-position: 50% 65%; }
+  .experiencia--romance { --image-position: 60% 50%; }
+
+  .experiencias[data-experiencias='sticky'] {
+    padding-bottom: 0;
+  }
+  .experiencias[data-experiencias='sticky'] .experiencias__percurso {
+    height: calc(100dvh + clamp(60rem, 150svh, 78rem));
+  }
+  .experiencias[data-experiencias='sticky'] .experiencias__fixacao {
+    position: sticky;
+    top: 0;
+    display: grid;
+    align-items: center;
+    height: 100dvh;
+  }
+  .experiencias[data-experiencias='sticky'] .experiencias__painel {
+    display: block;
+  }
+  .experiencias[data-experiencias='sticky'] .experiencias__stage {
+    position: relative;
+    top: auto;
+    height: var(--experiencias-altura-palco, 100svh);
+  }
+  .experiencias[data-experiencias='sticky'] .experiencia {
+    inset: 1rem 0;
+    grid-template-rows: var(--experiencias-altura-texto, auto) auto;
+    align-content: start;
+    gap: 1rem;
+  }
+  .experiencias[data-experiencias='sticky'] .experiencia__content {
+    grid-row: 1;
+    align-self: end;
+  }
+  .experiencias[data-experiencias='sticky'] .experiencia__description {
+    margin-top: 1rem;
+  }
+  .experiencias[data-experiencias='sticky'] .experiencia__media {
+    grid-row: 2;
+    height: auto;
+    aspect-ratio: 4 / 5;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

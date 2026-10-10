@@ -86,7 +86,6 @@
 .site-footer__heading {
   margin: 0 0 1.25rem;
   color: var(--footer-accent);
-  font-family: var(--font-interface);
   font-size: 1rem;
   font-weight: 400;
   letter-spacing: 0.16em;

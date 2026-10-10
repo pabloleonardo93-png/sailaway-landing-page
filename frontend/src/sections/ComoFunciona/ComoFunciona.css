@@ -21,7 +21,7 @@
 .como-funciona__eyebrow {
   margin: 0 0 1.25rem;
   font-size: 0.6875rem;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0.18em;
   line-height: 1.6;
 }
@@ -29,10 +29,10 @@
 .como-funciona__title {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(3rem, 5vw, 4.25rem);
+  font-size: var(--font-heading-size);
   font-weight: 400;
-  letter-spacing: -0.035em;
-  line-height: 1.06;
+  letter-spacing: var(--font-heading-tracking);
+  line-height: var(--font-heading-leading);
 }
 
 .como-funciona__title::after {
@@ -303,7 +303,7 @@
 @media (max-width: 59.999rem) {
   .como-funciona { --step-gap: 2.5rem; padding-block: 3.5rem 4rem; }
   .como-funciona__heading { margin-bottom: 2.5rem; }
-  .como-funciona__title { font-size: clamp(2.75rem, 8vw, 3.5rem); }
+  .como-funciona__title { font-size: var(--font-heading-size); }
   .como-funciona__steps { grid-template-columns: 1fr; }
   .como-funciona__step { display: grid; grid-template-columns: 3.5rem minmax(0, 1fr); gap: 1.25rem; }
   .como-funciona__content { margin: 0; }
