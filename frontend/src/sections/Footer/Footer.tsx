@@ -41,8 +41,8 @@ export function Footer() {
   }, [])
 
   const canais = [
-    { label: 'WhatsApp', href: contato.whatsapp?.trim(), externo: true },
     { label: 'Instagram', href: contato.instagram?.trim(), externo: true },
+    { label: 'WhatsApp', href: contato.whatsapp?.trim(), externo: true },
     { label: 'E-mail', href: contato.email?.trim() ? 'mailto:' + contato.email.trim() : undefined, externo: false },
   ].filter(({ href }) => Boolean(href))
   const aviso = avisoAtuacao?.trim()
@@ -103,8 +103,44 @@ export function Footer() {
                 <ul className="site-footer__links">
                   {canais.map(({ label, href, externo }) => (
                     <li key={label}>
-                      <a href={href} target={externo ? '_blank' : undefined} rel={externo ? 'noopener noreferrer' : undefined}>
-                        {label}
+                      <a
+                        href={href}
+                        target={externo ? '_blank' : undefined}
+                        rel={externo ? 'noopener noreferrer' : undefined}
+                        aria-label={label === 'Instagram'
+                          ? 'Instagram da SAILAWAY: @sailaway.tur (abre em nova aba)'
+                          : label === 'WhatsApp'
+                            ? 'Conversar com a SAILAWAY pelo WhatsApp (abre em nova aba)'
+                            : undefined}
+                      >
+                        {label === 'Instagram' && (
+                          <svg
+                            className="site-footer__contact-icon"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.75"
+                            aria-hidden="true"
+                            focusable="false"
+                          >
+                            <rect x="3" y="3" width="18" height="18" rx="5" />
+                            <circle cx="12" cy="12" r="4" />
+                            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                          </svg>
+                        )}
+                        {label === 'WhatsApp' && (
+                          <img
+                            className="site-footer__contact-icon"
+                            src={import.meta.env.BASE_URL + 'images/icons/whatsapp.svg'}
+                            width="24"
+                            height="24"
+                            alt=""
+                            aria-hidden="true"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        )}
+                        <span className="site-footer__contact-text">{label === 'Instagram' ? '@sailaway.tur' : label}</span>
                       </a>
                     </li>
                   ))}

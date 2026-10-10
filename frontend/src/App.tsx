@@ -1,4 +1,5 @@
 import { Header } from './components/Header/Header'
+import { WhatsAppFlutuante } from './components/WhatsAppFlutuante/WhatsAppFlutuante'
 import { Hero } from './sections/Hero/Hero'
 import { ViagensPassagens } from './sections/ViagensPassagens/ViagensPassagens'
 import { Captacao } from './sections/Captacao/Captacao'
@@ -21,6 +22,7 @@ export default function App() {
         <Faq />
       </main>
       <Footer />
+      <WhatsAppFlutuante areasProtegidas=".captacao__form, .site-nav" />
     </>
   )
 }

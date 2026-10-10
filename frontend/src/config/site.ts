@@ -26,13 +26,22 @@ export const captacao: {
   enviar: undefined,
 }
 
+const numeroWhatsAppOficial = '5551991976077'
+const mensagemWhatsAppOficial = 'Olá! Gostaria de conhecer melhor a SAILAWAY e entender como funciona a proposta de vocês.'
+
+export const whatsappOficial = {
+  numero: numeroWhatsAppOficial,
+  mensagem: mensagemWhatsAppOficial,
+  link: 'https://wa.me/' + numeroWhatsAppOficial + '?text=' + encodeURIComponent(mensagemWhatsAppOficial),
+} as const
+
 export const contato: {
   whatsapp: string | undefined
   instagram: string | undefined
   email: string | undefined
 } = {
-  whatsapp: undefined,
-  instagram: undefined,
+  whatsapp: whatsappOficial.link,
+  instagram: 'https://www.instagram.com/sailaway.tur/',
   email: undefined,
 }
 

@@ -79,9 +79,6 @@ export function Experiencias() {
           <h2 className="experiencias__title" id="experiencias-titulo">
             Qual viagem combina<br />com o seu momento?
           </h2>
-          <p className="experiencias__intro">
-            Tem viagem que pede mar aberto. Outras, alguns dias sem pressa. A SAILAWAY ajuda você a encontrar uma experiência que faça sentido para o que deseja viver agora.
-          </p>
         </div>
       </div>
       <div className="experiencias__percurso" ref={percursoRef}>

@@ -122,6 +122,22 @@
   transition: color var(--transition-fast);
 }
 
+.site-footer__contact .site-footer__links a {
+  gap: 0.625rem;
+  max-width: 100%;
+}
+
+.site-footer__contact-icon {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+}
+
+.site-footer__contact-text {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
 .site-footer__links a:hover { color: var(--footer-accent); }
 .site-footer__inner :focus-visible { outline-color: var(--footer-accent); }
 

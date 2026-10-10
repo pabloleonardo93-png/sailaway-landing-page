@@ -28,30 +28,10 @@
 .world-connections__video { opacity: 0; }
 .world-connections__video.is-ready { opacity: 1; }
 
-.world-connections__pause {
-  visibility: hidden;
-  display: grid;
-  place-items: center;
-  position: absolute;
-  right: 0.75rem;
-  bottom: 0.5rem;
-  width: 2.75rem;
-  height: 2.75rem;
-  padding: 0;
-  border: 0;
-  color: var(--color-sun-hover);
-  background: transparent;
-  cursor: pointer;
-}
-
-.world-connections__pause.is-ready { visibility: visible; }
-.world-connections__pause:hover { color: var(--color-off-white); }
-
 @media (max-width: 47.999rem) {
   .world-connections { width: 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .world-connections__video,
-  .world-connections__pause { display: none; }
+  .world-connections__video { display: none; }
 }
