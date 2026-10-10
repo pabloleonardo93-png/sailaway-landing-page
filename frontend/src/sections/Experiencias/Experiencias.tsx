@@ -69,7 +69,7 @@ function BlocoExperiencia({ experiencia }: { experiencia: Experiencia }) {
 }
 
 export function Experiencias() {
-  const { secaoRef, percursoRef, palcoRef } = useExperienciasSticky()
+  const { secaoRef, percursoRef, fixacaoRef, palcoRef } = useExperienciasSticky()
 
   return (
     <section className="experiencias" id="experiencias" aria-labelledby="experiencias-titulo" ref={secaoRef}>
@@ -85,10 +85,14 @@ export function Experiencias() {
         </div>
       </div>
       <div className="experiencias__percurso" ref={percursoRef}>
-        <div className="experiencias__inner experiencias__stage" ref={palcoRef}>
-          {experiencias.map((experiencia) => (
-            <BlocoExperiencia key={experiencia.id} experiencia={experiencia} />
-          ))}
+        <div className="experiencias__fixacao" ref={fixacaoRef}>
+          <div className="experiencias__painel">
+            <div className="experiencias__inner experiencias__stage" ref={palcoRef}>
+              {experiencias.map((experiencia) => (
+                <BlocoExperiencia key={experiencia.id} experiencia={experiencia} />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

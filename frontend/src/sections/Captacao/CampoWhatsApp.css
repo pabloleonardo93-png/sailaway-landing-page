@@ -1,0 +1,106 @@
+.whatsapp {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.whatsapp__pais {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: var(--captacao-control-height);
+  padding: 0.75rem;
+  border: 1px solid var(--captacao-line);
+  border-radius: 8px;
+  color: var(--color-navy);
+  background: var(--captacao-control-background);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.whatsapp__pais:hover,
+.whatsapp__pais[aria-expanded='true'] { border-color: var(--color-sun); }
+
+.whatsapp__bandeira {
+  display: block;
+  flex: 0 0 auto;
+  width: 24px;
+  height: 18px;
+  border-radius: 2px;
+  object-fit: cover;
+}
+
+.whatsapp__seta { flex: 0 0 auto; }
+.whatsapp__numero { flex: 1 1 0; }
+
+.whatsapp__menu {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  left: 0;
+  padding: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--color-navy) 18%, var(--color-white));
+  border-radius: 8px;
+  color: var(--color-navy);
+  background: var(--color-off-white);
+  box-shadow: 0 8px 24px rgb(3 24 39 / 12%);
+}
+
+.whatsapp__menu--acima { top: auto; bottom: calc(100% + 0.5rem); }
+
+.captacao__field .whatsapp__pesquisa {
+  min-height: 44px;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--color-navy) 22%, transparent);
+  border-radius: 4px;
+  color: var(--color-navy);
+  background: var(--color-white);
+  font-size: 0.875rem;
+  color-scheme: light;
+}
+
+.captacao__field .whatsapp__pesquisa::placeholder { color: rgb(6 47 75 / 65%); }
+.whatsapp__menu :focus-visible { outline-offset: 1px; }
+
+.whatsapp__lista {
+  position: relative;
+  max-height: min(15rem, calc(100dvh - 8rem));
+  margin-top: 0.5rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: var(--color-sun) transparent;
+  scrollbar-width: thin;
+}
+
+.whatsapp__opcao {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  width: 100%;
+  min-height: 44px;
+  padding: 0.625rem;
+  border: 0;
+  border-radius: 4px;
+  color: inherit;
+  background: transparent;
+  font-size: 0.875rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.whatsapp__opcao:hover,
+.whatsapp__opcao--ativa { background: rgb(255 189 74 / 20%); }
+.whatsapp__opcao[aria-selected='true'] { box-shadow: inset 2px 0 var(--color-sun); }
+.whatsapp__nome { flex: 1; min-width: 0; }
+.whatsapp__ddi { flex: 0 0 auto; font-variant-numeric: tabular-nums; }
+.whatsapp__vazio { margin: 0.875rem 0.625rem; font-size: 0.875rem; }
+
+@media (max-width: 47.999rem) {
+  .whatsapp__pais { gap: 0.375rem; padding-inline: 0.625rem; }
+  .captacao__field .whatsapp__numero { padding-inline: 0.75rem; }
+}

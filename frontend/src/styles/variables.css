@@ -10,13 +10,20 @@
   --color-overlay-light: rgb(3 24 39 / 8%);
   --color-overlay-top: rgb(3 24 39 / 22%);
 
-  --font-display: 'Liria', serif;
-  --font-interface: Arial, Helvetica, sans-serif;
+  --font-display: 'Aclonica', 'Trebuchet MS', sans-serif;
+  --font-interface: 'ADLaM Display', Arial, Helvetica, sans-serif;
+  --font-heading-size: clamp(2.5rem, 4vw, 3.5rem);
+  --font-heading-leading: 1.18;
+  --font-heading-tracking: -0.025em;
   --page-gutter: clamp(1.5rem, 6.25vw, 8rem);
   --content-width: 90rem;
   --header-height: 7rem;
   --transition-fast: 180ms ease;
   --transition-slow: 400ms ease;
+}
+
+@media (max-width: 47.999rem) {
+  :root { --font-heading-size: clamp(2.25rem, 7vw, 3rem); }
 }
 
 @media (max-width: 59.999rem) {

@@ -20,7 +20,7 @@
 .faq__eyebrow {
   margin: 0 0 2rem;
   font-size: 0.6875rem;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0.18em;
   line-height: 1.6;
 }
@@ -28,10 +28,10 @@
 .faq__title {
   margin: 0 0 1.75rem;
   font-family: var(--font-display);
-  font-size: clamp(3rem, 5vw, 4.25rem);
+  font-size: var(--font-heading-size);
   font-weight: 400;
-  letter-spacing: -0.035em;
-  line-height: 1.04;
+  letter-spacing: var(--font-heading-tracking);
+  line-height: var(--font-heading-leading);
 }
 
 .faq__intro {
@@ -63,7 +63,7 @@
 
 .faq__question button > span:first-child {
   font-size: clamp(1.125rem, 1.6vw, 1.375rem);
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.35;
 }
 
@@ -119,7 +119,6 @@
   .faq { padding-block: 3.5rem 4rem; }
   .faq__inner { grid-template-columns: 1fr; gap: 2.75rem; }
   .faq__eyebrow { margin-bottom: 1.5rem; font-size: 0.625rem; }
-  .faq__title { font-size: clamp(2.75rem, 8vw, 3.5rem); }
   .faq__intro { font-size: 1rem; }
   .faq__question button { min-height: 76px; padding-block: 1.25rem; }
   .faq__question button > span:first-child { font-size: 1.0625rem; }
