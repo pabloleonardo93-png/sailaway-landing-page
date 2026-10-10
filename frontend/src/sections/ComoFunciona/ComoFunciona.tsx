@@ -7,21 +7,21 @@ const etapas = [
     imagem: '/images/como-funciona/01-planejamento.webp',
     imagemAlt: 'Planejamento de viagem com mapa e anotações em uma varanda à beira-mar.',
     titulo: 'Conte o que procura',
-    descricao: 'Conte pra gente o destino, período, estilo de viagem e orçamento. Quanto mais detalhes, melhor.',
+    descricao: 'Conte pra gente o destino, a época em que quer viajar e quanto pretende gastar. Se ainda estiver decidindo alguma coisa, tudo bem.',
   },
   {
     numero: '02',
     imagem: '/images/como-funciona/02-atendimento-online.webp',
     imagemAlt: 'Mulher consultando o celular e o notebook em uma varanda com vista para o mar.',
-    titulo: 'Receba opções alinhadas ao seu orçamento',
-    descricao: 'A SAILAWAY apresenta alternativas de acordo com o que você procura, com as informações organizadas para facilitar sua escolha.',
+    titulo: 'Conheça as opções',
+    descricao: 'Com essas informações, a SAILAWAY apresenta alternativas de roteiro para você comparar com calma.',
   },
   {
     numero: '03',
     imagem: '/images/como-funciona/03-embarque.webp',
     imagemAlt: 'Viajante com mala em um terminal de aeroporto, diante de um avião.',
-    titulo: 'Organize e avance com apoio da SAILAWAY',
-    descricao: 'Depois de escolher sua opção, você recebe orientação para organizar os próximos passos da viagem.',
+    titulo: 'Organize os próximos passos',
+    descricao: 'Depois de escolher, você pode contar com nossa orientação para organizar o que falta antes da viagem.',
   },
 ] as const
 

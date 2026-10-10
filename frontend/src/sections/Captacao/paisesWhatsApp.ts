@@ -1,5 +1,7 @@
 import { getCountryCallingCode, parsePhoneNumberFromString, type CountryCode } from 'libphonenumber-js/max'
 
+export { interpretarWhatsApp } from './validacoesCaptacao'
+
 const paises: { codigo: CountryCode; nome: string }[] = [
   { codigo: 'BR', nome: 'Brasil' },
   { codigo: 'PT', nome: 'Portugal' },
@@ -23,21 +25,6 @@ export const paisesWhatsApp = paises.map((pais) => ({
   ddi: '+' + getCountryCallingCode(pais.codigo),
   bandeira: `${import.meta.env.BASE_URL}images/paises/${pais.codigo.toLowerCase()}.svg`,
 }))
-
-export function interpretarWhatsApp(valor: string, codigo: CountryCode) {
-  const nomePais = paisesWhatsApp.find((item) => item.codigo === codigo)?.nome ?? codigo
-  const telefone = parsePhoneNumberFromString(valor, { defaultCountry: codigo, extract: false })
-
-  if (!valor.trim()) return { erro: 'Informe seu WhatsApp.' }
-  if (!telefone?.isValid() || telefone.ext) {
-    return { erro: `Informe um número de WhatsApp válido para ${nomePais}.` }
-  }
-  if (telefone.country !== codigo) {
-    return { erro: `Confira o número e o país selecionado (${nomePais}).` }
-  }
-
-  return { numero: telefone.number, formatado: telefone.formatNational() }
-}
 
 export function detectarPaisWhatsApp(valor: string) {
   if (!valor.trim().startsWith('+')) return undefined

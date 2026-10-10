@@ -1,0 +1,4 @@
+/*
+  Content-Security-Policy: frame-ancestors 'none'; object-src 'none'; base-uri 'none'
+  X-Frame-Options: DENY
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()

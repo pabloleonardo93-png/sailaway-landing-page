@@ -20,19 +20,17 @@ export type DadosCaptacao = {
   interesse: InteresseCaptacao
 }
 
-export const captacao: {
-  enviar: ((dados: DadosCaptacao) => Promise<void>) | undefined
-} = {
-  enviar: undefined,
-}
-
 const numeroWhatsAppOficial = '5551991976077'
 const mensagemWhatsAppOficial = 'Olá! Gostaria de conhecer melhor a SAILAWAY e entender como funciona a proposta de vocês.'
+
+export function criarLinkWhatsApp(mensagem: string) {
+  return 'https://wa.me/' + numeroWhatsAppOficial + '?text=' + encodeURIComponent(mensagem)
+}
 
 export const whatsappOficial = {
   numero: numeroWhatsAppOficial,
   mensagem: mensagemWhatsAppOficial,
-  link: 'https://wa.me/' + numeroWhatsAppOficial + '?text=' + encodeURIComponent(mensagemWhatsAppOficial),
+  link: criarLinkWhatsApp(mensagemWhatsAppOficial),
 } as const
 
 export const contato: {
