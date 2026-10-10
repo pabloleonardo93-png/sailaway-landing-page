@@ -67,7 +67,7 @@ export function Footer() {
         <div className="site-footer__inner">
           <div className="site-footer__columns">
             <div className="site-footer__brand-column">
-              <a className="site-footer__brand" href="#inicio" aria-label="SAILAWAY — início">
+              <a className="site-footer__brand" href="#inicio" aria-label="SAILAWAY, início">
                 <img
                   src={`${import.meta.env.BASE_URL}images/logo/sailaway-logo-header-horizontal.png`}
                   width="1813"

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
 import { detectarPaisWhatsApp, interpretarWhatsApp, paisesWhatsApp, pesquisarPaisesWhatsApp } from './paisesWhatsApp'
+import { excedeComprimentoWhatsApp } from './validacoesCaptacao'
 import './CampoWhatsApp.css'
 
 type CampoWhatsAppProps = {
@@ -17,6 +18,7 @@ export function CampoWhatsApp({ erro, onValidar }: CampoWhatsAppProps) {
   const grupoRef = useRef<HTMLDivElement>(null)
   const botaoRef = useRef<HTMLButtonElement>(null)
   const pesquisaRef = useRef<HTMLInputElement>(null)
+  const numeroRef = useRef<HTMLInputElement>(null)
   const listaRef = useRef<HTMLDivElement>(null)
   const resultados = pesquisarPaisesWhatsApp(pesquisa)
 
@@ -27,6 +29,7 @@ export function CampoWhatsApp({ erro, onValidar }: CampoWhatsAppProps) {
   }
 
   function selecionar(proximo: typeof pais) {
+    numeroRef.current?.setCustomValidity('')
     setPais(proximo)
     setAberto(false)
     onValidar(valor.trim() ? interpretarWhatsApp(valor, proximo.codigo).erro : undefined)
@@ -181,6 +184,7 @@ export function CampoWhatsApp({ erro, onValidar }: CampoWhatsAppProps) {
         className="whatsapp__numero"
         id="captacao-whatsapp"
         name="whatsapp"
+        ref={numeroRef}
         type="tel"
         inputMode="tel"
         autoComplete="tel-national"
@@ -194,11 +198,21 @@ export function CampoWhatsApp({ erro, onValidar }: CampoWhatsAppProps) {
           const proximoValor = evento.target.value
           const paisDetectado = detectarPaisWhatsApp(proximoValor)
           const proximoPais = paisDetectado ?? pais
+          if (excedeComprimentoWhatsApp(proximoValor, proximoPais.codigo)) {
+            evento.currentTarget.setCustomValidity('Número de WhatsApp inválido.')
+            onValidar('Número de WhatsApp inválido.')
+            return
+          }
+          evento.currentTarget.setCustomValidity('')
           setValor(paisDetectado ? interpretarWhatsApp(proximoValor, proximoPais.codigo).formatado ?? proximoValor : proximoValor)
           setPais(proximoPais)
           if (erro) onValidar(interpretarWhatsApp(proximoValor, proximoPais.codigo).erro)
         }}
-        onBlur={() => {
+        onBlur={(evento) => {
+          if (evento.currentTarget.validity.customError) {
+            onValidar(evento.currentTarget.validationMessage)
+            return
+          }
           const resultado = interpretarWhatsApp(valor, pais.codigo)
           if (resultado.formatado) setValor(resultado.formatado)
           onValidar(resultado.erro)

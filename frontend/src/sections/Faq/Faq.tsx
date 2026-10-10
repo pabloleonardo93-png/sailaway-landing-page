@@ -4,27 +4,27 @@ import './Faq.css'
 const perguntas = [
   {
     pergunta: 'Como a SAILAWAY pode me ajudar a planejar uma viagem?',
-    resposta: 'Você conta pra gente para onde quer ir, quando pretende viajar e o que tem em mente. A partir disso, podemos conversar sobre as opções e ajudar a organizar seu roteiro.',
+    resposta: 'Conte pra gente onde você quer ir, quando pretende viajar e quanto pensa em gastar. A partir daí, podemos ajudar a organizar as opções de roteiro.',
   },
   {
-    pergunta: 'Posso pedir ajuda mesmo sem ter um destino definido?',
-    resposta: 'Claro. Se você ainda está escolhendo, pode contar o tipo de viagem que gostaria de fazer e quanto pretende gastar. Isso já ajuda a começar o planejamento.',
+    pergunta: 'E se eu ainda não tiver escolhido o destino?',
+    resposta: 'Tudo bem. Podemos começar pelo tipo de viagem que você gosta, pelos dias disponíveis e pelo orçamento.',
   },
   {
     pergunta: 'Como faço para me tornar sócio-membro?',
-    resposta: 'É só entrar em contato e dizer que quer conhecer a proposta de associação. A equipe explica como funciona a participação e quais são as condições, para você avaliar com calma.',
+    resposta: 'Entre em contato com a equipe para conhecer a proposta, as condições de adesão e as responsabilidades de quem participa. Assim, você pode decidir depois de tirar suas dúvidas.',
   },
   {
     pergunta: 'Como funciona a rede de membros?',
-    resposta: 'A SAILAWAY também apresenta uma proposta de participação em rede. Antes de aderir, você pode solicitar informações sobre as regras de indicação, as responsabilidades dos membros e as condições de participação.',
+    resposta: 'Nossa equipe explica as regras de participação, como funcionam as indicações e quais são as responsabilidades dos membros. Vale conhecer todas as condições antes de decidir.',
   },
   {
     pergunta: 'Posso comprar minha viagem diretamente pelo site?',
     resposta: 'Não. As viagens não são compradas pelo site. Aqui você pode conhecer as possibilidades de planejamento e a proposta de participação como membro.',
   },
   {
-    pergunta: 'Quais informações preciso enviar?',
-    resposta: 'O formulário solicita nome, WhatsApp, e-mail e a opção de interesse para ajudar a direcionar o atendimento. O canal de envio ainda está sendo configurado. Enquanto isso, seus dados não são enviados.',
+    pergunta: 'Quais dados o formulário pede?',
+    resposta: 'Pedimos seu nome, WhatsApp, e-mail e o assunto do contato. Depois de preencher, você será direcionado ao WhatsApp da SAILAWAY, com uma mensagem pronta para conferir e enviar.',
   },
 ] as const
 
@@ -37,10 +37,10 @@ export function Faq() {
         <div className="faq__heading">
           <p className="faq__eyebrow">DÚVIDAS FREQUENTES</p>
           <h2 className="faq__title" id="faq-titulo">
-            Antes de seguir,<br />talvez você queira saber.
+            Dúvidas sobre<br />a SAILAWAY
           </h2>
           <p className="faq__intro">
-            Algumas respostas rápidas para entender melhor como funciona o atendimento da SAILAWAY.
+            Respostas sobre planejamento de viagens e participação na rede de membros.
           </p>
         </div>
 

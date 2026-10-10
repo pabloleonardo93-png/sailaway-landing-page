@@ -140,7 +140,8 @@
   .experiencia__media {
     grid-column: 1;
     grid-row: 1;
-    height: clamp(18rem, 65vw, 30rem);
+    --experiencias-altura-foto-minima: 18rem;
+    height: clamp(var(--experiencias-altura-foto-minima), 65vw, 30rem);
   }
   .experiencia__content {
     grid-column: 1;
@@ -195,7 +196,8 @@
   }
   .experiencias[data-experiencias='sticky'] .experiencia__media {
     grid-row: 2;
-    height: auto;
+    height: var(--experiencias-altura-foto, auto);
+    min-height: var(--experiencias-altura-foto-minima);
     aspect-ratio: 4 / 5;
   }
 }

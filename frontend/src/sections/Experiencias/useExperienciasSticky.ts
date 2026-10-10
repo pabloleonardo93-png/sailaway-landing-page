@@ -41,29 +41,38 @@ export function useExperienciasSticky() {
           delete secao.dataset.experiencias
           secao.style.removeProperty('--experiencias-altura-texto')
           secao.style.removeProperty('--experiencias-altura-palco')
+          secao.style.removeProperty('--experiencias-altura-foto')
         }
 
         const configurar = () => {
           if (!ativo) return
           secao.dataset.experiencias = 'sticky'
-          if (mobile) secao.style.removeProperty('--experiencias-altura-palco')
+          if (mobile) {
+            secao.style.removeProperty('--experiencias-altura-palco')
+            secao.style.removeProperty('--experiencias-altura-foto')
+          }
 
           const alturaDisponivel = mobile ? fixacao.clientHeight : palco.clientHeight
           const alturaTexto = Math.ceil(Math.max(...textos.map((texto) =>
             mobile ? Math.max(texto.scrollHeight, texto.getBoundingClientRect().height) : texto.scrollHeight,
           )))
-          const alturaFoto = mobile ? fotografias[0].getBoundingClientRect().height : 0
+          const alturaFotoIdeal = mobile ? fotografias[0].getBoundingClientRect().height : 0
+          const alturaMinimaFoto = mobile ? parseFloat(getComputedStyle(fotografias[0]).minHeight) : 0
           const etapa = palco.querySelector<HTMLElement>('.experiencia')
           if (!etapa) return
           const estiloEtapa = getComputedStyle(etapa)
           const margens = parseFloat(estiloEtapa.top) + parseFloat(estiloEtapa.bottom)
           const intervalo = mobile ? parseFloat(estiloEtapa.rowGap) : 0
+          const alturaFoto = mobile
+            ? Math.min(alturaFotoIdeal, Math.floor(alturaDisponivel - alturaTexto - margens - intervalo))
+            : 0
           const alturaNecessaria = Math.ceil(alturaTexto + margens + (mobile ? alturaFoto + intervalo : 0))
-          const cabeNoPalco = alturaNecessaria <= alturaDisponivel
+          const cabeNoPalco = alturaNecessaria <= alturaDisponivel && alturaFoto >= alturaMinimaFoto
           const medidas = [palco.clientWidth, alturaDisponivel, alturaTexto, alturaFoto, cabeNoPalco].join(':')
 
           if (mobile && cabeNoPalco) {
             secao.style.setProperty('--experiencias-altura-palco', alturaNecessaria + 'px')
+            secao.style.setProperty('--experiencias-altura-foto', alturaFoto + 'px')
           }
 
           if (medidas === medidasAnteriores) {

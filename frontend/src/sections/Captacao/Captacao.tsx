@@ -1,7 +1,8 @@
 import { useState, type FormEvent } from 'react'
-import { captacao, type DadosCaptacao, type InteresseCaptacao } from '../../config/site'
+import { criarLinkWhatsApp, type DadosCaptacao, type InteresseCaptacao } from '../../config/site'
 import { CampoWhatsApp } from './CampoWhatsApp'
 import { interpretarWhatsApp, paisesWhatsApp } from './paisesWhatsApp'
+import { criarMensagemCaptacao, validarNome, validarEmail, validarMensagemWhatsApp, validarUrlWhatsApp } from './validacoesCaptacao'
 import './Captacao.css'
 
 const campos = [
@@ -20,24 +21,34 @@ type ErrosCaptacao = Partial<Record<keyof DadosCaptacao, string>>
 
 function validar(formulario: HTMLFormElement) {
   const valores = new FormData(formulario)
-  const nome = String(valores.get('nome') ?? '').trim()
-  const whatsapp = String(valores.get('whatsapp') ?? '').trim()
+  const nomeInformado = String(valores.get('nome') ?? '')
+  const nome = nomeInformado.trim()
+  const whatsapp = String(valores.get('whatsapp') ?? '')
   const pais = paisesWhatsApp.find((item) => item.codigo === valores.get('whatsapp-pais')) ?? paisesWhatsApp[0]
   const telefone = interpretarWhatsApp(whatsapp, pais.codigo)
-  const email = String(valores.get('email') ?? '').trim()
+  const emailInformado = String(valores.get('email') ?? '')
+  const email = emailInformado.trim()
   const interesse = interesses.find((opcao) => opcao.valor === valores.get('interesse'))?.valor
   const campoEmail = formulario.elements.namedItem('email') as HTMLInputElement
   const erros: ErrosCaptacao = {}
 
-  if (!nome) erros.nome = 'Informe seu nome.'
+  const erroNome = validarNome(nomeInformado)
+  if (erroNome) erros.nome = erroNome
 
-  if (telefone.erro) erros.whatsapp = telefone.erro
+  const campoWhatsApp = formulario.elements.namedItem('whatsapp') as HTMLInputElement
+  if (campoWhatsApp.validity.customError) erros.whatsapp = campoWhatsApp.validationMessage
+  else if (telefone.erro) erros.whatsapp = telefone.erro
 
-  if (!email || campoEmail.validity.typeMismatch) {
-    erros.email = 'Informe um e-mail válido.'
+  const erroEmail = validarEmail(emailInformado)
+  if (erroEmail || campoEmail.validity.typeMismatch) {
+    erros.email = erroEmail ?? 'Informe um e-mail válido.'
   }
 
-  if (!interesse) erros.interesse = 'Escolha um dos interesses.'
+  if (!erros.email) campoEmail.value = email
+  const campoNome = formulario.elements.namedItem('nome') as HTMLInputElement
+  if (!erros.nome) campoNome.value = nome
+
+  if (!interesse) erros.interesse = 'Escolha um assunto.'
 
   const dados: DadosCaptacao | undefined = Object.keys(erros).length === 0 && interesse && telefone.numero
     ? { nome, whatsapp: telefone.numero, email, interesse }
@@ -48,17 +59,27 @@ function validar(formulario: HTMLFormElement) {
 
 export function Captacao() {
   const [erros, setErros] = useState<ErrosCaptacao>({})
-  const [mensagem, setMensagem] = useState('')
-  const [enviando, setEnviando] = useState(false)
+  const [linkConversa, setLinkConversa] = useState('')
+  const [erroMensagem, setErroMensagem] = useState('')
 
-  async function enviarInteresse(evento: FormEvent<HTMLFormElement>) {
+  function conferirCampo(nome: 'nome' | 'email', valor: string) {
+    const erro = nome === 'nome' ? validarNome(valor) : validarEmail(valor)
+    setErros((anteriores) => {
+      const atualizados = { ...anteriores }
+      if (erro) atualizados[nome] = erro
+      else delete atualizados[nome]
+      return atualizados
+    })
+  }
+
+  function enviarInteresse(evento: FormEvent<HTMLFormElement>) {
     evento.preventDefault()
-    if (enviando) return
 
     const formulario = evento.currentTarget
     const resultado = validar(formulario)
     setErros(resultado.erros)
-    setMensagem('')
+    setLinkConversa('')
+    setErroMensagem('')
 
     if (!resultado.dados) {
       const primeiroErro = Object.keys(resultado.erros)[0]
@@ -66,20 +87,18 @@ export function Captacao() {
       return
     }
 
-    if (!captacao.enviar) {
-      setMensagem('O canal de envio ainda está sendo configurado. Seus dados não foram enviados.')
+    const assunto = interesses.find((opcao) => opcao.valor === resultado.dados?.interesse)!.label
+    const mensagem = criarMensagemCaptacao(resultado.dados, assunto)
+    const erroTexto = validarMensagemWhatsApp(mensagem)
+    const link = erroTexto ? '' : criarLinkWhatsApp(mensagem)
+    const erroLink = erroTexto ?? validarUrlWhatsApp(link)
+    if (erroLink) {
+      setErroMensagem(erroLink)
+      formulario.querySelector<HTMLButtonElement>('[type="submit"]')?.focus()
       return
     }
-
-    setEnviando(true)
-    try {
-      await captacao.enviar(resultado.dados)
-      setMensagem('Seu interesse foi enviado.')
-    } catch {
-      setMensagem('Não foi possível enviar. Seus dados continuam nos campos. Tente novamente.')
-    } finally {
-      setEnviando(false)
-    }
+    setLinkConversa(link)
+    window.open(link, '_blank', 'noopener,noreferrer')
   }
 
   return (
@@ -96,22 +115,24 @@ export function Captacao() {
           <div className="captacao__overlay" aria-hidden="true" />
         </div>
         <div className="captacao__heading">
-          <p className="captacao__eyebrow">VAMOS PLANEJAR?</p>
+          <p className="captacao__eyebrow">FALE CONOSCO</p>
           <h2 className="captacao__title" id="captacao-titulo">
             Vamos <span className="captacao__title-accent">conversar?</span>
           </h2>
           <p className="captacao__intro">
-            Quer planejar uma viagem ou saber como funciona a participação na SAILAWAY? Escolha o assunto que mais interessa a você e conte pra gente o que está procurando.
+            Quer planejar uma viagem ou saber mais sobre a nossa rede de membros? Escolha o assunto e conte pra gente o que você procura.
           </p>
         </div>
 
         <form
           className="captacao__form"
           aria-labelledby="captacao-titulo"
-          aria-busy={enviando}
           noValidate
           onSubmit={enviarInteresse}
-          onChange={() => setMensagem('')}
+          onChange={() => {
+            setLinkConversa('')
+            setErroMensagem('')
+          }}
         >
           <p className="captacao__announcement" role="alert">{Object.values(erros)[0] ?? ''}</p>
           {campos.map(({ nome, label, tipo, autocomplete, placeholder }) => (
@@ -127,7 +148,7 @@ export function Captacao() {
                       else delete atualizados.whatsapp
                       return atualizados
                     })
-                    setMensagem('')
+                    setLinkConversa('')
                   }}
                 />
               ) : (
@@ -138,6 +159,8 @@ export function Captacao() {
                   autoComplete={autocomplete}
                   placeholder={placeholder}
                   required
+                  onChange={(evento) => conferirCampo(nome, evento.currentTarget.value)}
+                  onBlur={(evento) => conferirCampo(nome, evento.currentTarget.value)}
                   aria-invalid={erros[nome] ? true : undefined}
                   aria-describedby={erros[nome] ? 'captacao-' + nome + '-erro' : undefined}
                 />
@@ -176,13 +199,28 @@ export function Captacao() {
             )}
           </fieldset>
 
-          <button className="captacao__submit" type="submit" disabled={enviando}>
-            {enviando ? 'Enviando…' : 'Fale conosco'}
+          <p className="captacao__privacy" id="captacao-privacidade">
+            Seus dados serão incluídos em uma mensagem no WhatsApp. Você poderá conferir tudo antes de enviar.
+          </p>
+          {erroMensagem && <p className="captacao__error" id="captacao-mensagem-erro" role="alert">{erroMensagem}</p>}
+          <button
+            className="captacao__submit"
+            type="submit"
+            aria-describedby={'captacao-privacidade' + (erroMensagem ? ' captacao-mensagem-erro' : '')}
+          >
+            Fale conosco
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
               <path d="M4 12h16m-6-6 6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
-          <p className="captacao__status" role="status" aria-live="polite">{mensagem}</p>
+          <p className="captacao__status" role="status" aria-live="polite">
+            {linkConversa && (
+              <>
+                Confira a mensagem e confirme o envio no WhatsApp. Se a conversa não abriu,{' '}
+                <a href={linkConversa} target="_blank" rel="noopener noreferrer">abra por este link</a>.
+              </>
+            )}
+          </p>
         </form>
       </div>
     </section>

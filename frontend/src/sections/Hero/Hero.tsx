@@ -77,7 +77,7 @@ export function Hero() {
             Explore novos horizontes
           </h1>
           <p className="hero__description">
-            Cada pessoa tem seus próprios planos e sonhos. Na SAILAWAY, você pode planejar sua próxima viagem e conhecer uma proposta diferente para fazer parte da nossa rede de membros.
+            Quer planejar uma viagem ou conhecer melhor a SAILAWAY? Podemos ajudar você a organizar seu roteiro e explicar como funciona a participação na nossa rede de membros.
           </p>
           <Button href={planningUrl} showArrow={false}>Quero saber mais</Button>
         </div>

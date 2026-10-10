@@ -17,16 +17,16 @@ const experiencias: Experiencia[] = [
     imagem: import.meta.env.BASE_URL + 'images/experiencias/cruzeiros.webp',
     descricaoImagem: 'Deck de um navio com espreguiçadeiras, passageiros e vista para o mar ao pôr do sol.',
     categoria: 'Planejamento de viagens',
-    frase: 'Vamos tirar sua viagem do papel?',
-    descricao: 'Já sabe para onde quer ir ou ainda está escolhendo? Conte pra gente o que tem em mente. A SAILAWAY ajuda você a organizar seus planos e avaliar as opções para sua próxima viagem.',
+    frase: 'Já tem uma viagem em mente?',
+    descricao: 'Você pode chegar com o destino decidido ou ainda estar escolhendo. Conte pra gente quando pretende viajar e o que procura. Ajudamos a organizar as opções.',
   },
   {
     id: 'praias-resorts',
     imagem: import.meta.env.BASE_URL + 'images/experiencias/praias-resorts.webp',
     descricaoImagem: 'Piscina de um resort à beira-mar, com espreguiçadeiras e palmeiras.',
     categoria: 'Roteiros personalizados',
-    frase: 'Sua viagem, do seu jeito.',
-    descricao: 'Tem quem prefira passar uns dias na praia. Outros gostam de cruzeiros ou de conhecer vários lugares na mesma viagem. A SAILAWAY ajuda a montar um roteiro levando em conta suas preferências, o tempo disponível e quanto você pretende gastar.',
+    frase: 'Praia, cruzeiro ou um pouco de tudo?',
+    descricao: 'Um roteiro pode incluir praias, cruzeiros ou várias paradas. A gente leva em conta suas preferências, o tempo disponível e o orçamento para ajudar a organizar sua viagem.',
   },
   {
     id: 'romance',
@@ -34,7 +34,7 @@ const experiencias: Experiencia[] = [
     descricaoImagem: 'Casal caminhando por um caminho de pedra junto à costa ao pôr do sol.',
     categoria: 'Seja um sócio-membro',
     frase: 'Quer fazer parte da SAILAWAY?',
-    descricao: 'Você também pode conhecer nossa proposta de participação como membro. Entre em contato, entenda como funciona a adesão, conheça as condições e tire suas dúvidas antes de decidir.',
+    descricao: 'Antes de decidir, você pode entender como funciona a adesão, conhecer as condições e conversar sobre as responsabilidades de quem participa. Nossa equipe também pode esclarecer suas dúvidas.',
   },
 ]
 

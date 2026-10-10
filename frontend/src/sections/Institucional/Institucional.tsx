@@ -12,12 +12,12 @@ export function Institucional() {
             Viajar também é criar conexões.
           </h2>
           <p className="institucional__description">
-            A SAILAWAY reúne pessoas que gostam de viajar e querem conhecer novas possibilidades.
+            A SAILAWAY ajuda você a organizar sua próxima viagem, mesmo que ainda não tenha escolhido o destino.
           </p>
           <p className="institucional__description">
-            Se você está organizando as próximas férias, pode contar com a nossa ajuda para planejar seu roteiro. E, se tem interesse em fazer parte da SAILAWAY, pode conversar com a equipe para entender como funciona a participação como membro.
+            Também temos uma proposta para quem deseja participar da nossa rede de membros. Nossa equipe explica as condições e tira suas dúvidas antes de qualquer decisão.
           </p>
-          <a className="institucional__link" href={planningUrl}>Conte seus planos</a>
+          <a className="institucional__link" href={planningUrl}>Fale com a equipe</a>
         </div>
         <figure className="institucional__figure">
           <WorldConnections />
