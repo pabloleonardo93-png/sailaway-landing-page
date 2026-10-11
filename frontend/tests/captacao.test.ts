@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { interpretarWhatsApp, excedeComprimentoWhatsApp, emailValido, criarMensagemCaptacao, limitesCaptacao, validarNome, validarEmail, possuiControleUnicode, validarMensagemWhatsApp, validarUrlWhatsApp } from '../src/sections/Captacao/validacoesCaptacao.ts'
+import { getExampleNumber } from 'libphonenumber-js/max'
+import exemplos from 'libphonenumber-js/examples.mobile.json'
+import { interpretarWhatsApp, prepararEntradaWhatsApp, excedeComprimentoWhatsApp, emailValido, criarMensagemCaptacao, limitesCaptacao, validarNome, validarEmail, possuiControleUnicode, validarMensagemWhatsApp, validarUrlWhatsApp } from '../src/sections/Captacao/validacoesCaptacao.ts'
 
 test('Brasil exige celular válido com DDD e onze dígitos nacionais', () => {
   for (const valor of ['', ' ', '119876543', '1198765432', '00123456789', '1132345678', '119876543210']) {
@@ -9,7 +11,7 @@ test('Brasil exige celular válido com DDD e onze dígitos nacionais', () => {
   const nacional = interpretarWhatsApp('(11) 98765-4321', 'BR')
   assert.equal(nacional.numero, '+5511987654321')
   assert.equal(interpretarWhatsApp('+55 (11) 98765-4321', 'BR').numero, nacional.numero)
-  assert.equal(interpretarWhatsApp('5511987654321', 'BR').numero, nacional.numero)
+  assert.ok(interpretarWhatsApp('5511987654321', 'BR').erro)
   assert.ok(interpretarWhatsApp('(11) 98765-4321 ramal 2', 'BR').erro)
 })
 
@@ -139,4 +141,59 @@ test('acentos e caracteres especiais chegam intactos ao parâmetro codificado', 
   assert.equal(validarMensagemWhatsApp(mensagem), undefined)
   assert.equal(validarUrlWhatsApp(url.href), undefined)
   assert.equal(url.searchParams.size, 1)
+})
+
+test('entrada permite edição nacional parcial sem erros prematuros', () => {
+  for (const valor of ['', '1', '11', '1198', '(11) 98765-', '(11) 98765-4321', ' 11 98765 4321 ']) {
+    assert.equal(prepararEntradaWhatsApp(valor, 'BR').valor, valor)
+  }
+})
+
+test('caracteres inadequados e sinal de mais não contornam o limite', () => {
+  for (const valor of ['51999999999+123456', '11987654321+', '11+987654321', '++5511987654321', '11987654321abc', '11/987654321', '11987654321\u200D', '11987654321\n']) {
+    assert.ok(prepararEntradaWhatsApp(valor, 'BR').erro, valor)
+    assert.ok(interpretarWhatsApp(valor, 'BR').erro, valor)
+  }
+  assert.equal(excedeComprimentoWhatsApp('51999999999+123456', 'BR'), true)
+  assert.ok(prepararEntradaWhatsApp('9'.repeat(300), 'BR').erro)
+})
+
+test('DDI completo é convertido explicitamente sem duplicação ou mudança de país', () => {
+  assert.equal(prepararEntradaWhatsApp('+55 (11) 98765-4321', 'BR').valor, '(11) 98765-4321')
+  assert.equal(interpretarWhatsApp('+55 (11) 98765-4321', 'BR').numero, '+5511987654321')
+  for (const valor of ['+', '+55', '+551198765', '+55 55 11 98765 4321', '5511987654321']) {
+    assert.ok(prepararEntradaWhatsApp(valor, 'BR').erro, valor)
+  }
+  assert.ok(prepararEntradaWhatsApp('+351912345678', 'BR').erro)
+  assert.equal(prepararEntradaWhatsApp('+12025550123', 'US').valor, '(202) 555-0123')
+  assert.ok(prepararEntradaWhatsApp('+14165550123', 'US').erro)
+  assert.equal(prepararEntradaWhatsApp('+14165550123', 'CA').valor, '(416) 555-0123')
+})
+
+test('onze dígitos com DDD 51 continuam sujeitos aos metadados e ao tipo móvel', () => {
+  assert.equal(interpretarWhatsApp('51987654321', 'BR').numero, '+5551987654321')
+  for (const valor of ['51000000000', '51323456789', '5198765432']) {
+    assert.ok(interpretarWhatsApp(valor, 'BR').erro)
+  }
+  assert.equal(interpretarWhatsApp('51987654321', 'BR').erro, undefined)
+})
+
+test('os quinze países preservam exemplos de formato nacional e internacional da biblioteca', () => {
+  for (const codigo of ['BR', 'PT', 'US', 'CA', 'AR', 'UY', 'PY', 'CL', 'ES', 'GB', 'FR', 'IT', 'DE', 'CO', 'MX'] as const) {
+    const telefone = getExampleNumber(codigo, exemplos)
+    assert.ok(telefone)
+    assert.equal(prepararEntradaWhatsApp(telefone.formatNational(), codigo).valor, telefone.formatNational(), codigo)
+    assert.equal(interpretarWhatsApp(telefone.formatNational(), codigo).numero, telefone.number, codigo)
+    assert.equal(interpretarWhatsApp(telefone.number, codigo).numero, telefone.number, codigo)
+    assert.ok(prepararEntradaWhatsApp('9'.repeat(300), codigo).erro, codigo)
+  }
+})
+
+test('limite segue os metadados de cada país e revalidação respeita DDI compartilhado', () => {
+  assert.ok(prepararEntradaWhatsApp('9123456780', 'PT').erro)
+  assert.ok(prepararEntradaWhatsApp('20255501234', 'US').erro)
+  assert.ok(prepararEntradaWhatsApp('41655501234', 'CA').erro)
+  assert.equal(prepararEntradaWhatsApp('01512 3456789', 'DE').erro, undefined)
+  assert.ok(interpretarWhatsApp('2025550123', 'CA').erro)
+  assert.equal(interpretarWhatsApp('2025550123', 'US').numero, '+12025550123')
 })

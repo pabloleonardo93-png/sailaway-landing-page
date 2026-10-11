@@ -1,4 +1,4 @@
-import { parsePhoneNumberFromString, validatePhoneNumberLength, type CountryCode } from 'libphonenumber-js/max'
+import { getCountryCallingCode, parsePhoneNumberFromString, validatePhoneNumberLength, type CountryCode } from 'libphonenumber-js/max'
 import type { DadosCaptacao } from '../../config/site'
 
 export const limitesCaptacao = {
@@ -43,16 +43,42 @@ export function validarUrlWhatsApp(url: string) {
 }
 
 export function excedeComprimentoWhatsApp(valor: string, codigo: CountryCode) {
-  const telefone = parsePhoneNumberFromString(valor, { defaultCountry: codigo, extract: false })
-  return validatePhoneNumberLength(valor, codigo) === 'TOO_LONG'
-    || (codigo === 'BR' && telefone?.country === 'BR' && telefone.nationalNumber.length > 11)
+  const digitos = valor.replace(/\D/g, '')
+  const ddi = getCountryCallingCode(codigo)
+  const nacional = valor.trim().startsWith('+') && digitos.startsWith(ddi)
+    ? digitos.slice(ddi.length)
+    : digitos
+  const numeroParaMedir = valor.trim().startsWith('+') ? '+' + digitos : digitos
+  return (codigo === 'BR' && nacional.length > 11)
+    || validatePhoneNumberLength(numeroParaMedir, codigo) === 'TOO_LONG'
+}
+
+export function prepararEntradaWhatsApp(valor: string, codigo: CountryCode) {
+  if (possuiControleUnicode(valor) || !/^\+?[\d () .\-\p{Zs}]*$/u.test(valor.trim())) {
+    return { erro: 'Use apenas números, espaços, parênteses e hífens. O DDI só pode aparecer no início.' }
+  }
+  if (excedeComprimentoWhatsApp(valor, codigo)) {
+    return { erro: 'Esse número tem dígitos demais.', limiteExcedido: true }
+  }
+  if (valor.trim().startsWith('+')) {
+    const telefone = parsePhoneNumberFromString(valor, { extract: false })
+    if (!telefone?.isValid()) {
+      return { erro: 'Cole o telefone completo com DDI ou digite apenas o número nacional.' }
+    }
+    if (telefone.country !== codigo) {
+      return { erro: 'Confira o número e o país selecionado.' }
+    }
+    return { valor: telefone.formatNational() }
+  }
+  return { valor }
 }
 
 export function interpretarWhatsApp(valor: string, codigo: CountryCode) {
   if (!valor.trim()) return { erro: 'Informe seu WhatsApp.' }
-  if (possuiControleUnicode(valor)) return { erro: 'Número de WhatsApp inválido.' }
-  const telefone = parsePhoneNumberFromString(valor, { defaultCountry: codigo, extract: false })
-  if (!telefone?.isValid() || telefone.ext || excedeComprimentoWhatsApp(valor, codigo)) {
+  const entrada = prepararEntradaWhatsApp(valor, codigo)
+  if (entrada.erro) return { erro: entrada.erro }
+  const telefone = parsePhoneNumberFromString(entrada.valor!, { defaultCountry: codigo, extract: false })
+  if (!telefone?.isValid() || telefone.ext || telefone.number.length > 16) {
     return { erro: codigo === 'BR' ? 'Confira o DDD e o número.' : 'Número de WhatsApp inválido.' }
   }
   if (telefone.country !== codigo) return { erro: 'Confira o número e o país selecionado.' }

@@ -11,12 +11,24 @@ export function Hero() {
     const video = videoRef.current
     if (!video) return
 
+    let primeiroFrame: number | undefined
+    const exibirPrimeiroFrame = () => {
+      if (typeof video.requestVideoFrameCallback !== 'function') return
+      if (primeiroFrame !== undefined) video.cancelVideoFrameCallback(primeiroFrame)
+      primeiroFrame = video.requestVideoFrameCallback(() => {
+        primeiroFrame = undefined
+        setHasFrame(true)
+      })
+    }
+
     const mobile = window.matchMedia('(max-width: 59.999rem)')
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
     const syncPlayback = () => {
-      if (reducedMotion.matches || document.hidden) {
+      const deveReproduzir = !reducedMotion.matches && !document.hidden
+      video.autoplay = deveReproduzir
+      if (!deveReproduzir) {
         video.pause()
-      } else {
+      } else if (video.paused) {
         void video.play().catch(() => {
           // Mantém o fundo de segurança se o navegador bloquear o autoplay.
         })
@@ -35,8 +47,8 @@ export function Hero() {
       }
     }
 
-    // A preferência de movimento tem prioridade sobre o autoplay padrão.
-    video.autoplay = !reducedMotion.matches
+    video.addEventListener('loadedmetadata', exibirPrimeiroFrame)
+    if (video.readyState >= HTMLMediaElement.HAVE_METADATA) exibirPrimeiroFrame()
     syncSource()
     syncPlayback()
     video.addEventListener('loadeddata', syncPlayback)
@@ -45,6 +57,8 @@ export function Hero() {
     document.addEventListener('visibilitychange', syncPlayback)
 
     return () => {
+      video.removeEventListener('loadedmetadata', exibirPrimeiroFrame)
+      if (primeiroFrame !== undefined) video.cancelVideoFrameCallback(primeiroFrame)
       video.removeEventListener('loadeddata', syncPlayback)
       mobile.removeEventListener('change', syncSource)
       reducedMotion.removeEventListener('change', syncPlayback)

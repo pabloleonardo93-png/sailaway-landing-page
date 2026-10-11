@@ -35,9 +35,7 @@ function validar(formulario: HTMLFormElement) {
   const erroNome = validarNome(nomeInformado)
   if (erroNome) erros.nome = erroNome
 
-  const campoWhatsApp = formulario.elements.namedItem('whatsapp') as HTMLInputElement
-  if (campoWhatsApp.validity.customError) erros.whatsapp = campoWhatsApp.validationMessage
-  else if (telefone.erro) erros.whatsapp = telefone.erro
+  if (telefone.erro) erros.whatsapp = telefone.erro
 
   const erroEmail = validarEmail(emailInformado)
   if (erroEmail || campoEmail.validity.typeMismatch) {
