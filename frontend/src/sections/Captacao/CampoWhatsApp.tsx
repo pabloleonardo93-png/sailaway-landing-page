@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
-import { detectarPaisWhatsApp, interpretarWhatsApp, paisesWhatsApp, pesquisarPaisesWhatsApp } from './paisesWhatsApp'
-import { excedeComprimentoWhatsApp } from './validacoesCaptacao'
+import { interpretarWhatsApp, paisesWhatsApp, pesquisarPaisesWhatsApp } from './paisesWhatsApp'
+import { prepararEntradaWhatsApp } from './validacoesCaptacao'
 import './CampoWhatsApp.css'
 
 type CampoWhatsAppProps = {
@@ -19,8 +19,22 @@ export function CampoWhatsApp({ erro, onValidar }: CampoWhatsAppProps) {
   const botaoRef = useRef<HTMLButtonElement>(null)
   const pesquisaRef = useRef<HTMLInputElement>(null)
   const numeroRef = useRef<HTMLInputElement>(null)
+  const selecaoRef = useRef({ inicio: 0, fim: 0 })
   const listaRef = useRef<HTMLDivElement>(null)
   const resultados = pesquisarPaisesWhatsApp(pesquisa)
+
+  useEffect(() => {
+    const campo = numeroRef.current
+    if (!campo) return
+    const guardarSelecao = () => {
+      selecaoRef.current = {
+        inicio: campo.selectionStart ?? 0,
+        fim: campo.selectionEnd ?? 0,
+      }
+    }
+    campo.addEventListener('beforeinput', guardarSelecao)
+    return () => campo.removeEventListener('beforeinput', guardarSelecao)
+  }, [])
 
   function abrirLista() {
     setPesquisa('')
@@ -29,7 +43,6 @@ export function CampoWhatsApp({ erro, onValidar }: CampoWhatsAppProps) {
   }
 
   function selecionar(proximo: typeof pais) {
-    numeroRef.current?.setCustomValidity('')
     setPais(proximo)
     setAberto(false)
     onValidar(valor.trim() ? interpretarWhatsApp(valor, proximo.codigo).erro : undefined)
@@ -194,25 +207,31 @@ export function CampoWhatsApp({ erro, onValidar }: CampoWhatsAppProps) {
         aria-invalid={erro ? true : undefined}
         aria-describedby={erro ? 'captacao-whatsapp-erro' : undefined}
         onFocus={() => setAberto(false)}
-        onChange={(evento) => {
-          const proximoValor = evento.target.value
-          const paisDetectado = detectarPaisWhatsApp(proximoValor)
-          const proximoPais = paisDetectado ?? pais
-          if (excedeComprimentoWhatsApp(proximoValor, proximoPais.codigo)) {
-            evento.currentTarget.setCustomValidity('Número de WhatsApp inválido.')
-            onValidar('Número de WhatsApp inválido.')
-            return
+        onSelect={(evento) => {
+          selecaoRef.current = {
+            inicio: evento.currentTarget.selectionStart ?? 0,
+            fim: evento.currentTarget.selectionEnd ?? 0,
           }
-          evento.currentTarget.setCustomValidity('')
-          setValor(paisDetectado ? interpretarWhatsApp(proximoValor, proximoPais.codigo).formatado ?? proximoValor : proximoValor)
-          setPais(proximoPais)
-          if (erro) onValidar(interpretarWhatsApp(proximoValor, proximoPais.codigo).erro)
         }}
-        onBlur={(evento) => {
-          if (evento.currentTarget.validity.customError) {
-            onValidar(evento.currentTarget.validationMessage)
+        onChange={(evento) => {
+          const proximoValor = evento.currentTarget.value
+          const entrada = prepararEntradaWhatsApp(proximoValor, pais.codigo)
+          if (entrada.erro) {
+            const apagando = (evento.nativeEvent as InputEvent).inputType?.startsWith('delete')
+            if (apagando && proximoValor.length < valor.length && entrada.limiteExcedido) {
+              setValor(proximoValor)
+              if (erro) onValidar(undefined)
+              return
+            }
+            evento.currentTarget.value = valor
+            evento.currentTarget.setSelectionRange(selecaoRef.current.inicio, selecaoRef.current.fim)
+            onValidar(entrada.erro)
             return
           }
+          setValor(entrada.valor!)
+          if (erro) onValidar(undefined)
+        }}
+        onBlur={() => {
           const resultado = interpretarWhatsApp(valor, pais.codigo)
           if (resultado.formatado) setValor(resultado.formatado)
           onValidar(resultado.erro)

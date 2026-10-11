@@ -1,4 +1,4 @@
-import { getCountryCallingCode, parsePhoneNumberFromString, type CountryCode } from 'libphonenumber-js/max'
+import { getCountryCallingCode, type CountryCode } from 'libphonenumber-js/max'
 
 export { interpretarWhatsApp } from './validacoesCaptacao'
 
@@ -25,13 +25,6 @@ export const paisesWhatsApp = paises.map((pais) => ({
   ddi: '+' + getCountryCallingCode(pais.codigo),
   bandeira: `${import.meta.env.BASE_URL}images/paises/${pais.codigo.toLowerCase()}.svg`,
 }))
-
-export function detectarPaisWhatsApp(valor: string) {
-  if (!valor.trim().startsWith('+')) return undefined
-  const telefone = parsePhoneNumberFromString(valor, { extract: false })
-  if (!telefone?.isValid()) return undefined
-  return paisesWhatsApp.find((pais) => pais.codigo === telefone.country)
-}
 
 export function pesquisarPaisesWhatsApp(pesquisa: string) {
   const consulta = pesquisa.trim().normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase()
