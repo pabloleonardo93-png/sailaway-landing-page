@@ -1,7 +1,7 @@
 .institucional {
   --sobre-fundo-texto: color-mix(in srgb, var(--color-navy) 70%, #02070d);
   --sobre-fundo-video: #070d16;
-  padding-block: clamp(4rem, 7vw, 6.5rem);
+  padding-block: clamp(2.5rem, 4.5vw, 4rem);
   overflow: clip;
   color: var(--color-off-white);
   background: linear-gradient(
@@ -15,16 +15,16 @@
 
 .institucional__inner {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.06fr);
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
   align-items: center;
-  gap: clamp(2.5rem, 5vw, 5rem);
+  gap: 3rem;
   width: calc(100% - var(--page-gutter) * 2);
   max-width: 1280px;
   margin-inline: auto;
 }
 
 .institucional__eyebrow {
-  margin: 0 0 1.75rem;
+  margin: 0 0 1.25rem;
   color: var(--color-sun-hover);
   font-size: 0.6875rem;
   font-weight: 400;
@@ -33,25 +33,30 @@
 }
 
 .institucional__title {
-  margin: 0 0 1.75rem;
-  font-size: var(--font-heading-size);
-  letter-spacing: var(--font-heading-tracking);
-  line-height: var(--font-heading-leading);
+  margin: 0 0 1.25rem;
+  color: var(--color-white);
+  font-family: 'Times New Roman', Times, 'Liberation Serif', serif;
+  font-size: clamp(1.5rem, 2.8vw, 2.5rem);
+  letter-spacing: -0.035em;
+  line-height: 1.05;
 }
+
+.institucional__title-highlight { color: #be8f47; }
 
 .institucional__description {
   max-width: 29rem;
-  margin: 0 0 1.125rem;
+  margin: 0 0 1rem;
   color: color-mix(in srgb, var(--color-off-white) 85%, var(--sobre-fundo-texto));
-  font-size: 1rem;
-  line-height: 1.8;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.5;
 }
 
 .institucional__link {
   display: inline-flex;
   align-items: center;
   min-height: 2.75rem;
-  margin-top: 0.5rem;
+  margin-top: 1.5rem;
   color: var(--color-sun-hover);
   font-size: 0.875rem;
   font-weight: 400;
@@ -65,6 +70,60 @@
 
 .institucional__figure { min-width: 0; margin: 0; }
 
+.institucional__benefits {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.institucional__benefit {
+  display: grid;
+  grid-template-columns: 2.75rem minmax(0, 1fr);
+  align-items: start;
+  gap: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid color-mix(in srgb, #be8f47 25%, transparent);
+}
+
+.institucional__benefit-icon {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  color: #be8f47;
+  background: color-mix(in srgb, #be8f47 9%, transparent);
+}
+
+.institucional__benefit-icon svg { display: block; width: 1.5rem; height: 1.5rem; }
+
+.institucional__benefit-title {
+  margin: 0 0 0.5rem;
+  color: var(--color-white);
+  font-family: 'Times New Roman', Times, 'Liberation Serif', serif;
+  font-size: clamp(1.375rem, 1.6vw, 1.5rem);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.institucional__benefit-description {
+  max-width: 29rem;
+  margin: 0;
+  color: color-mix(in srgb, var(--color-off-white) 85%, var(--sobre-fundo-texto));
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 63.999rem) {
+  .institucional__inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .institucional__title { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+}
+
 @media (max-width: 47.999rem) {
   .institucional {
     background: linear-gradient(
@@ -75,6 +134,6 @@
       var(--sobre-fundo-video) 100%
     );
   }
-  .institucional__inner { grid-template-columns: 1fr; gap: 2.5rem; }
-  .institucional__eyebrow { margin-bottom: 1.5rem; }
+  .institucional__title { font-size: clamp(1.75rem, 6.8vw, 2.75rem); }
+  .institucional__benefits { grid-template-columns: 1fr; }
 }

@@ -3,6 +3,7 @@ import { criarLinkWhatsApp, type DadosCaptacao, type InteresseCaptacao } from '.
 import { CampoWhatsApp } from './CampoWhatsApp'
 import { interpretarWhatsApp, paisesWhatsApp } from './paisesWhatsApp'
 import { criarMensagemCaptacao, validarNome, validarEmail, validarMensagemWhatsApp, validarUrlWhatsApp } from './validacoesCaptacao'
+import '../../components/Button/Button.css'
 import './Captacao.css'
 
 const campos = [
@@ -202,14 +203,17 @@ export function Captacao() {
           </p>
           {erroMensagem && <p className="captacao__error" id="captacao-mensagem-erro" role="alert">{erroMensagem}</p>}
           <button
-            className="captacao__submit"
+            className="captacao__submit button--diagonal"
             type="submit"
             aria-describedby={'captacao-privacidade' + (erroMensagem ? ' captacao-mensagem-erro' : '')}
           >
-            Fale conosco
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-              <path d="M4 12h16m-6-6 6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <span className="button__content">
+              <span>Fale conosco</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                <path d="M4 12h16m-6-6 6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+            <span className="button__diagonal" aria-hidden="true" />
           </button>
           <p className="captacao__status" role="status" aria-live="polite">
             {linkConversa && (
