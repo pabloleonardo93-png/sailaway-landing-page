@@ -9,15 +9,19 @@ type ButtonProps = {
 }
 
 export function Button({ children, href, showArrow = true, onClick }: ButtonProps) {
-  const className = 'button button--solid'
+  const className = 'button button--solid button--diagonal'
+  const arrow = (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+      <path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  )
   const content = (
     <>
-      <span>{children}</span>
-      {showArrow && (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" strokeWidth="1.5" />
-        </svg>
-      )}
+      <span className="button__content">
+        <span>{children}</span>
+        {showArrow && arrow}
+      </span>
+      <span className="button__diagonal" aria-hidden="true" />
     </>
   )
 

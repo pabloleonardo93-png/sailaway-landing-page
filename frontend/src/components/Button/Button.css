@@ -4,6 +4,7 @@
   justify-content: center;
   gap: 1.75rem;
   min-height: 3.5rem;
+  max-width: 100%;
   padding: 1rem 1.5rem;
   border: 1px solid transparent;
   border-radius: 999px;
@@ -11,11 +12,70 @@
   font-weight: 400;
   line-height: 1.25;
   text-decoration: none;
-  transition: background-color var(--transition-fast), border-color var(--transition-fast);
 }
 
 .button--solid { color: var(--color-sun); background: var(--color-navy); }
-.button--solid:not(:disabled):hover { background: var(--color-ocean); }
 
+.button__content {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: inherit;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.button--solid:not(:disabled):active { scale: 0.95; }
 .button:disabled { cursor: not-allowed; }
 .button:disabled svg { opacity: 0.45; }
+
+.button--diagonal {
+  position: relative;
+  isolation: isolate;
+  --diagonal-active: 0;
+  overflow: hidden;
+  transition: color 300ms ease-in-out, scale 150ms ease-in-out;
+}
+
+.button__diagonal {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  container-type: size;
+  pointer-events: none;
+}
+
+.button__diagonal::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(100cqw + 100cqh);
+  aspect-ratio: 1;
+  background: var(--color-sun);
+  transform: translate(
+    calc(-150% + var(--diagonal-active) * 100%),
+    calc(50% - var(--diagonal-active) * 100%)
+  ) rotate(-40deg);
+  transition: transform 500ms ease-out;
+}
+
+.button--diagonal:not(:disabled):focus-visible {
+  --diagonal-active: 1;
+  color: var(--color-navy);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button--diagonal:not(:disabled):hover {
+    --diagonal-active: 1;
+    color: var(--color-navy);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button--diagonal,
+  .button__diagonal::before { transition: none; }
+  .button--solid:not(:disabled):active { scale: 1; }
+}

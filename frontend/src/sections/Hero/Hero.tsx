@@ -88,10 +88,12 @@ export function Hero() {
       <div className="hero__inner container">
         <div className="hero__content">
           <h1 className="hero__title" id="hero-title">
-            Explore novos horizontes
+            SEU PRÓXIMO<br />
+            <span className="hero__title-highlight">HORIZONTE</span><br />
+            COMEÇA AQUI.
           </h1>
           <p className="hero__description">
-            Quer planejar uma viagem ou conhecer melhor a SAILAWAY? Podemos ajudar você a organizar seu roteiro e explicar como funciona a participação na nossa rede de membros.
+            Descubra uma oportunidade no universo do turismo que conecta flexibilidade, desenvolvimento e experiências.
           </p>
           <Button href={planningUrl} showArrow={false}>Quero saber mais</Button>
         </div>
