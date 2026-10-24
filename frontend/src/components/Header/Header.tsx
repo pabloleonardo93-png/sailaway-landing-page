@@ -47,7 +47,7 @@ export function Header() {
       <div className="site-header__inner">
         <a className="site-header__brand" href="#inicio" aria-label="SAILAWAY, início">
           <img
-            src={`${import.meta.env.BASE_URL}images/logo/sailaway-logo-header-horizontal.png`}
+            src={`${import.meta.env.BASE_URL}images/logo/sailaway-logo-header-horizontal-lossless.png`}
             width="1813"
             height="368"
             alt="SAILAWAY"

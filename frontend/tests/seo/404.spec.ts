@@ -1,0 +1,68 @@
+import { test, expect, caixa } from '../e2e/apoio'
+
+test.describe('404 estática sem JavaScript nas seis resoluções', () => {
+  test.use({ javaScriptEnabled: false })
+
+  test('Mockup mantém conteúdo real, arte local, geometria e retorno por teclado', async ({ page }, testInfo) => {
+    const caminho = '/horizonte-nao-encontrado'
+    testInfo.annotations.push({ type: 'recurso-indisponivel', description: caminho })
+    const resposta = await page.goto(caminho)
+    expect(resposta!.status()).toBe(404)
+    await expect(page).toHaveTitle('Página não encontrada | SAILAWAY')
+    await expect(page.locator('html')).toHaveAttribute('lang', 'pt-BR')
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex')
+    await expect(page.locator('h1')).toHaveText('Parece que este horizonte ainda não existe.')
+    await expect(page.locator('.erro__descricao')).toHaveText('A página que você procura não foi encontrada.Que tal voltar e explorar novas possibilidades?')
+    await expect(page.getByRole('img', { name: 'Erro 404', exact: true })).toBeVisible()
+    await expect(page.locator('script, #root, link[rel="canonical"]')).toHaveCount(0)
+    const logo = page.getByRole('img', { name: 'SAILAWAY — Explore novos horizontes' })
+    await expect(logo).toHaveAttribute('src', '/images/logo/sailaway-logo.png')
+    expect(await logo.evaluate(e => (e as HTMLImageElement).complete && (e as HTMLImageElement).naturalWidth === 1310)).toBe(true)
+    const arte = await page.locator('svg image').evaluateAll(imagens => [...new Set(imagens.map(e => e.getAttribute('href')))])
+    expect(arte).toEqual(['/images/404/mockup-aprovado.png'])
+    for (const endereco of ['/images/404/mockup-aprovado.png', '/images/logo/sailaway-logo.png']) expect((await page.request.head(endereco)).status()).toBe(200)
+    const elementos = await Promise.all([logo, page.locator('.erro__codigo'), page.locator('h1'), page.locator('.erro__descricao'), page.getByRole('link', { name: 'Voltar ao início' })].map(caixa))
+    for (let indice = 1; indice < elementos.length; indice++) expect(elementos[indice].y).toBeGreaterThanOrEqual(elementos[indice - 1].y + elementos[indice - 1].height)
+    const largura = page.viewportSize()!.width
+    for (const elemento of elementos) {
+      expect(elemento.x).toBeGreaterThanOrEqual(0)
+      expect(elemento.x + elemento.width).toBeLessThanOrEqual(largura + 1)
+    }
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+    const botao = page.getByRole('link', { name: 'Voltar ao início' })
+    await expect(botao).toHaveAttribute('href', '/')
+    await page.keyboard.press('Tab')
+    await expect(botao).toBeFocused()
+    await expect(botao).toHaveCSS('outline-style', 'solid')
+    await expect(botao).toHaveCSS('outline-width', '3px')
+    await page.evaluate(() => (document.activeElement as HTMLElement)?.blur())
+    const captura = testInfo.outputPath('404-sem-javascript.png')
+    await page.screenshot({ path: captura, fullPage: true })
+    await testInfo.attach('404 sem JavaScript', { path: captura, contentType: 'image/png' })
+    await testInfo.attach('geometria-404', { body: JSON.stringify({ viewport: page.viewportSize(), elementos }), contentType: 'application/json' })
+    await botao.focus()
+    await botao.press('Enter')
+    await expect(page).toHaveURL('http://127.0.0.1:4173/')
+    await expect(page.locator('#root')).toHaveAttribute('data-ssg', 'true')
+    await expect(page.locator('h1')).toHaveText('SEU PRÓXIMOHORIZONTECOMEÇA AQUI.')
+  })
+})
+
+test('Hover e movimento reduzido da 404 preservam dimensões e semântica', async ({ page }, testInfo) => {
+  const caminho = '/hover-da-pagina-inexistente'
+  testInfo.annotations.push({ type: 'recurso-indisponivel', description: caminho })
+  expect((await page.goto(caminho))!.status()).toBe(404)
+  const botao = page.getByRole('link', { name: 'Voltar ao início' })
+  const antes = await caixa(botao)
+  const sombra = await botao.evaluate(e => getComputedStyle(e).boxShadow)
+  await botao.hover()
+  await expect.poll(() => botao.evaluate(e => getComputedStyle(e).boxShadow)).not.toBe(sombra)
+  await botao.evaluate(async e => { await Promise.all(e.getAnimations().map(a => a.finished)) })
+  expect(await caixa(botao)).toEqual(antes)
+  await page.mouse.move(0, 0)
+  await expect.poll(() => botao.evaluate(e => getComputedStyle(e).boxShadow)).toBe(sombra)
+  await page.emulateMedia({ reducedMotion: 'reduce' })
+  await expect(botao).toHaveCSS('transition-duration', '0s')
+  await botao.hover()
+  expect(await caixa(botao)).toEqual(antes)
+})

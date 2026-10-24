@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Página não encontrada | SAILAWAY</title>
+    <link rel="icon" href="/images/logo/sailaway-favicon.svg?v=3" type="image/svg+xml" />
+    <style>
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100svh;
+        position: relative;
+        display: grid;
+        place-items: center;
+        padding: clamp(1rem, 2.5svh, 2.25rem) 1.5rem clamp(7rem, 15svh, 11rem);
+        color: #062f4b;
+        background: radial-gradient(ellipse at 50% 75%, #fff2d4, transparent 55%), #f9f6ee;
+        font-family: 'Times New Roman', Times, 'Liberation Serif', serif;
+      }
+      .erro__paisagem { position: absolute; bottom: 0; width: 100%; height: auto; aspect-ratio: 1586 / 462; min-height: 16rem; pointer-events: none; }
+      .erro__conteudo { position: relative; width: 100%; max-width: 88rem; display: flex; flex-direction: column; align-items: center; text-align: center; }
+      .erro__logo { display: block; width: clamp(11rem, min(22vw, 26svh), 22rem); height: auto; mix-blend-mode: multiply; }
+      .erro__codigo { position: relative; display: flex; align-items: center; justify-content: center; margin-top: clamp(1rem, 3svh, 2rem); font-size: clamp(11rem, min(24vw, 33svh), 25rem); line-height: 0.75; }
+      .erro__numero { width: 0.633em; height: 0.76em; fill: #062f4b; stroke: #b8843e; stroke-width: 0.6; }
+      .erro__zero { width: 0.666em; height: 0.76em; }
+      .erro__aves { position: absolute; width: 0.36em; height: 0.28em; top: 12%; right: -18%; fill: none; stroke: #cb8c32; stroke-width: 1.6; stroke-linecap: round; }
+      h1 { max-width: 70rem; margin: clamp(0.875rem, 2svh, 1.375rem) 0 0; font-size: clamp(1.75rem, min(3.2vw, 5svh), 3.25rem); font-weight: 400; line-height: 1.14; letter-spacing: -0.025em; }
+      .erro__descricao { margin: 0.625rem 0 0; color: #59636b; font-size: clamp(1.125rem, min(1.8vw, 2.8svh), 1.7rem); line-height: 1.18; }
+      .erro__voltar {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.625rem;
+        min-height: 3.5rem;
+        width: min(100%, 21rem);
+        margin-top: clamp(1.125rem, 2.5svh, 1.75rem);
+        padding: 0.75rem 1.5rem;
+        border: 1px solid #c58b3b;
+        border-radius: 999px;
+        background: linear-gradient(160deg, #06314e, #03233a);
+        box-shadow: 0 4px 8px #8e5e2e33;
+        color: #fff;
+        font-size: clamp(1.25rem, 2.4svh, 1.75rem);
+        line-height: 1.2;
+        text-decoration: none;
+        transition: box-shadow 200ms ease, border-color 200ms ease;
+      }
+      .erro__voltar svg { width: 1em; height: 1em; fill: none; stroke: #c99241; stroke-width: 1.4; }
+      .erro__voltar:hover { border-color: #e3b46b; box-shadow: 0 5px 12px #8e5e2e55; }
+      .erro__voltar:focus-visible { outline: 3px solid #062f4b; outline-offset: 5px; }
+      @media (max-width: 59.999rem) {
+        .erro__logo { width: clamp(11rem, 32vw, 16rem); }
+        .erro__codigo { font-size: clamp(9rem, 36vw, 20rem); }
+        h1 { max-width: 38rem; font-size: clamp(1.75rem, 4.6vw, 2.375rem); }
+        .erro__descricao { font-size: clamp(1.125rem, 2.5vw, 1.4375rem); }
+      }
+      @media (max-width: 37.499rem) {
+        .erro__logo { width: clamp(11rem, 50vw, 14rem); }
+        .erro__codigo { font-size: clamp(9rem, 43vw, 16.5rem); margin-top: 1.25rem; }
+        .erro__aves { right: -10%; width: 0.3em; }
+        h1 { max-width: 24rem; }
+        .erro__voltar { width: min(100%, 18rem); }
+      }
+      @media (prefers-reduced-motion: reduce) { .erro__voltar { transition: none; } }
+    </style>
+  </head>
+  <body>
+    <svg class="erro__paisagem" viewBox="0 0 1586 462" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="ceu" x2="0" y2="1">
+          <stop stop-color="#f9f6ee" />
+          <stop offset="0.35" stop-color="#fff1d2" />
+          <stop offset="0.595" stop-color="#f3cb8e" />
+        </linearGradient>
+        <linearGradient id="nuvens-esquerda">
+          <stop offset="0.6" stop-color="white" />
+          <stop offset="1" stop-color="white" stop-opacity="0" />
+        </linearGradient>
+        <linearGradient id="nuvens-direita">
+          <stop stop-color="white" stop-opacity="0" />
+          <stop offset="0.4" stop-color="white" />
+        </linearGradient>
+        <linearGradient id="transicao-ceu" x2="0" y2="1">
+          <stop stop-color="white" stop-opacity="0" />
+          <stop offset="0.12" stop-color="white" />
+        </linearGradient>
+        <linearGradient id="transicao-planos" x2="0" y2="1"><stop stop-color="white" stop-opacity="0" /><stop offset="0.3" stop-color="white" /></linearGradient>
+        <linearGradient id="transicao-mar" x2="0" y2="1"><stop stop-color="white" stop-opacity="0" /><stop offset="0.16" stop-color="white" /></linearGradient>
+        <mask id="fundir-ceu"><rect width="1586" height="462" fill="url(#transicao-ceu)" /></mask>
+        <mask id="fundir-planos" maskUnits="userSpaceOnUse" x="0" y="170" width="610" height="105"><rect y="170" width="610" height="105" fill="url(#transicao-planos)" /></mask>
+        <mask id="fundir-mar" maskUnits="userSpaceOnUse" x="0" y="0" width="1586" height="187">
+          <rect width="1586" height="187" fill="url(#transicao-mar)" />
+          <rect width="610" height="187" fill="url(#nuvens-esquerda)" />
+          <rect x="976" width="610" height="187" fill="url(#nuvens-direita)" />
+        </mask>
+        <mask id="recorte-esquerda" maskUnits="userSpaceOnUse" x="0" y="0" width="610" height="275">
+          <rect width="350" height="275" fill="url(#nuvens-esquerda)" />
+          <rect y="170" width="610" height="105" fill="url(#nuvens-esquerda)" mask="url(#fundir-planos)" />
+        </mask>
+        <mask id="recorte-direita" maskUnits="userSpaceOnUse" x="0" y="0" width="610" height="275">
+          <rect x="260" width="350" height="275" fill="url(#nuvens-direita)" />
+          <rect y="170" width="610" height="105" fill="url(#nuvens-direita)" mask="url(#fundir-planos)" />
+        </mask>
+      </defs>
+      <g mask="url(#fundir-ceu)">
+        <rect width="1586" height="462" fill="url(#ceu)" />
+        <g mask="url(#recorte-esquerda)">
+          <svg width="610" height="275" viewBox="0 530 610 275"><image href="/images/404/mockup-aprovado.png" width="1586" height="992" /></svg>
+        </g>
+        <g transform="translate(976 0)" mask="url(#recorte-direita)">
+          <svg width="610" height="275" viewBox="976 530 610 275"><image href="/images/404/mockup-aprovado.png" width="1586" height="992" /></svg>
+        </g>
+      </g>
+      <g transform="translate(0 275)" mask="url(#fundir-mar)">
+        <svg width="1586" height="187" viewBox="0 805 1586 187"><image href="/images/404/mockup-aprovado.png" width="1586" height="992" /></svg>
+      </g>
+    </svg>
+    <main class="erro__conteudo">
+      <img class="erro__logo" src="/images/logo/sailaway-logo.png" width="1310" height="1017" alt="SAILAWAY — Explore novos horizontes" />
+      <div class="erro__codigo" role="img" aria-label="Erro 404">
+        <svg class="erro__numero" viewBox="0 0 200 240" aria-hidden="true" focusable="false">
+          <defs><path id="quatro" fill-rule="evenodd" d="M151 1q6-3 6 4v153h19q15 0 21 17l-5-1q-4-4-11-4h-24v43q0 18 33 20v4H91v-4q25-2 25-20v-39H0Zm-35 49L21 158h95Z" /></defs>
+          <use href="#quatro" />
+        </svg>
+        <svg class="erro__zero" viewBox="688 315 215 245" aria-hidden="true" focusable="false">
+          <defs><clipPath id="zero"><ellipse cx="795.5" cy="437" rx="106" ry="121" /></clipPath></defs>
+          <image href="/images/404/mockup-aprovado.png" width="1586" height="992" clip-path="url(#zero)" />
+        </svg>
+        <svg class="erro__numero" viewBox="0 0 200 240" aria-hidden="true" focusable="false"><use href="#quatro" /></svg>
+        <svg class="erro__aves" viewBox="0 0 120 90" aria-hidden="true" focusable="false">
+          <path d="M4 8q13 0 18 8q5-8 18-8M82 39q12-6 18 2q5-9 18-10M29 58q12 2 15 13q9-6 24 3" />
+        </svg>
+      </div>
+      <h1>Parece que este horizonte ainda não existe.</h1>
+      <p class="erro__descricao">A página que você procura não foi encontrada.<br />Que tal voltar e explorar novas possibilidades?</p>
+      <a class="erro__voltar" href="/">
+        Voltar ao início
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h16m-6-6l6 6-6 6" /></svg>
+      </a>
+    </main>
+  </body>
+</html>

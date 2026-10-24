@@ -6,7 +6,6 @@
 }
 
 .site-footer__inner {
-  width: calc(100% - var(--page-gutter) * 2);
   max-width: 1280px;
   margin-inline: auto;
 }

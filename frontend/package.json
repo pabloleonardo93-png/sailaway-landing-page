@@ -5,9 +5,18 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && node scripts/construir-ssg.mjs",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "node --test tests/captacao.test.ts",
+    "test:ui": "playwright test",
+    "test:ssg": "playwright test --config playwright.ssg.config.ts",
+    "test:estrito": "playwright test --config playwright.estrito.config.ts",
+    "test:seo:unit": "node --test tests/seo/seo.test.mjs",
+    "test:seo": "node --test tests/seo/seo.test.mjs && node tests/seo/preparar-cenarios.mjs && playwright test --config playwright.seo.config.ts",
+    "test:ui:atualizar": "playwright test --update-snapshots",
+    "test:performance": "node scripts/medir-performance.mjs",
+    "typecheck": "tsc -b && tsc -p tsconfig.tests.json"
   },
   "dependencies": {
     "gsap": "^3.15.0",
@@ -16,6 +25,7 @@
     "react-dom": "^19.2.8"
   },
   "devDependencies": {
+    "@playwright/test": "1.64.1",
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",

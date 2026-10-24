@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { avisoAtuacao, contato } from '../../config/site'
 import './Footer.css'
 
-const anoAtual = new Date().getFullYear()
+const anoAtual = import.meta.env.VITE_ANO_PUBLICACAO
 
 const explore = [
   { label: 'Experiências', href: '#experiencias' },
@@ -69,7 +69,7 @@ export function Footer() {
             <div className="site-footer__brand-column">
               <a className="site-footer__brand" href="#inicio" aria-label="SAILAWAY, início">
                 <img
-                  src={`${import.meta.env.BASE_URL}images/logo/sailaway-logo-header-horizontal.png`}
+                  src={`${import.meta.env.BASE_URL}images/logo/sailaway-logo-header-horizontal-lossless.png`}
                   width="1813"
                   height="368"
                   alt="SAILAWAY"

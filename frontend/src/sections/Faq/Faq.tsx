@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useSyncExternalStore } from 'react'
 import './Faq.css'
 
 const perguntas = [
@@ -28,8 +28,11 @@ const perguntas = [
   },
 ] as const
 
+const acompanharAmbiente = () => () => {}
+
 export function Faq() {
   const [perguntaAberta, setPerguntaAberta] = useState<number | null>(0)
+  const interativa = useSyncExternalStore(acompanharAmbiente, () => true, () => false)
 
   return (
     <section className="faq" id="faq" aria-labelledby="faq-titulo">
@@ -69,7 +72,7 @@ export function Faq() {
                   id={respostaId}
                   role="region"
                   aria-labelledby={botaoId}
-                  aria-hidden={!aberta}
+                  aria-hidden={interativa ? !aberta : undefined}
                 >
                   <div className="faq__answer-inner">
                     <p>{resposta}</p>

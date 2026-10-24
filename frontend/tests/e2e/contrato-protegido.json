@@ -1,0 +1,20 @@
+{
+  "commit": "017543852f713bf2fc7e165e17d445dab4fdb0a2",
+  "arquivos": {
+    "frontend/public/videos/footer-mar-web.mp4": "ed71528013f44acda3c7a454ee915af6872e1c066f3a7fead266e831951152d5",
+    "frontend/public/videos/footer-mar.mp4": "fbddca3c27708a7f937f140e118534adfd9f1a8ea38547ab65e2f86426f26add",
+    "frontend/public/videos/hero-2.mp4": "da19d56ef1532e7f66f05c4700efb0f2b05f4758006c920f63b9baf77d99c060",
+    "frontend/public/videos/hero-sailaway-10s-1080p-web.mp4": "67208545e78fb2c44e7c63052df92dab282ee5ddec51c90623648a5d307d11d5",
+    "frontend/public/videos/hero-sailaway-hq.mp4": "a2b315a2b0b4276932fd5e4f116d0d223f099b155cfd35f076d01b94ac0542ca",
+    "frontend/public/videos/hero-sailaway-ultra.mp4": "fc7f11f701f7d0dccb5f7bb05433d6fd682ae8a441c2f9d88d2183f0611a206d",
+    "frontend/public/videos/hero-sailaway.mp4": "ca15864562f4f024fe4f881ac7282dd5fedfd4b408a7242633ccbf5fd22a028e",
+    "frontend/public/videos/sailaway-globo-web.mp4": "c6f8be4ed69971ea161ba37738150436ffd3ef59d2c461acf4bfa876bd5078cd",
+    "frontend/public/images/sailaway-globo-poster.webp": "1a8bdd25092e20db7841f23be99592ba4088ca9cea458d5a13e21c57407dde6e",
+    "frontend/src/sections/Hero/Hero.tsx": "da5b3eb239c7d65953a219ae84f080b5dd66e10fdbf6c9caf13f6f513e80dea0",
+    "frontend/src/sections/Hero/Hero.css": "eabce2b26ef1b8fc86b22b16b752f4cbf9eb395668ee4737ce5abb618e38a727",
+    "frontend/src/components/WorldConnections/WorldConnections.tsx": "d8116f6565cfc231b1c6691b8736f36bcf80e165407d12f5178d46e4b797e891",
+    "frontend/src/components/WorldConnections/WorldConnections.css": "14e13fb8b4eed750b1434192647362481796ddf22e77dd7a7925991aa49458e6",
+    "frontend/src/sections/Experiencias/useExperienciasSticky.ts": "cc8d69bcbbeb85b433e431a95695ffcf41628d6858746b2cf8680d288d859f36",
+    "frontend/src/sections/ComoFunciona/useTimelineComoFunciona.ts": "059fcd20f6102f98e88309ac627f1cee7dcd3e96f866a5ca4ddbf85fbd515494"
+  }
+}

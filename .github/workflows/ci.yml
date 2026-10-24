@@ -21,7 +21,7 @@ defaults:
 jobs:
   frontend:
     name: Validar frontend
-    runs-on: ubuntu-latest
+    runs-on: windows-2022
 
     steps:
       - name: Obter o repositório
@@ -42,11 +42,37 @@ jobs:
       - name: Auditar dependências
         run: npm audit --audit-level=high
 
+      - name: Instalar somente Chromium headless e requisitos
+        run: npx --no-install playwright install --with-deps --only-shell chromium
+
       - name: Executar lint
         run: npm run lint
 
-      - name: Testar o formulário
-        run: node --test tests/captacao.test.ts
+      - name: Verificar TypeScript
+        run: npm run typecheck
 
-      - name: Verificar TypeScript e gerar build
+      - name: Executar testes unitários do formulário
+        run: npm test
+
+      - name: Gerar build de produção
+        id: build
         run: npm run build
+
+      - name: Verificar integridade dos recursos e referências
+        run: node scripts/verificar-integridade.mjs
+
+      - name: Testar SSG e hidratação
+        run: npm run test:ssg
+
+      - name: Testar React StrictMode
+        run: npm run test:estrito
+
+      - name: Testar SEO e cenários de publicação
+        run: npm run test:seo
+
+      - name: Testar interface e referências visuais
+        run: npm run test:ui
+
+      - name: Revalidar integridade após os testes
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
+        run: node scripts/verificar-integridade.mjs
